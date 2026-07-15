@@ -1,0 +1,30 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://yk5hyx6im6od"]
+
+[ext_resource type="Shader" uid="uid://ct6c05fhiuwny" path="res://shaders/monster_environment.gdshader" id="1_sqyrh"]
+
+[sub_resource type="Gradient" id="Gradient_b4682"]
+offsets = PackedFloat32Array(0.6260388, 0.79501384, 0.94736844)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dvk7s"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_7m6vp"]
+width = 128
+height = 128
+depth = 128
+noise = SubResource("FastNoiseLite_dvk7s")
+color_ramp = SubResource("Gradient_b4682")
+seamless = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_sqyrh")
+shader_parameter/tile_scale = 1.0
+shader_parameter/rot_strength = 0.5
+shader_parameter/contrast_adjust = 0.75
+shader_parameter/noise_texture = SubResource("NoiseTexture3D_7m6vp")
+shader_parameter/scroll_speed = 0.255
+shader_parameter/uv1_blend_sharpness = 150.0
+shader_parameter/uv1_scale = Vector3(0.2, 0.2, 0.2)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
