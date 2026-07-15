@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://64plbj0vqw8h"]
 
-[ext_resource type="Script" uid="uid://bgxkmb8pou5j6" path="res://maps/character_body_3d.gd" id="1_avg5r"]
+[ext_resource type="Script" uid="uid://cyio6vy6bmq2u" path="res://characters/shared/player_controller.gd" id="1_icmfn"]
 [ext_resource type="Shader" uid="uid://v8a20qinjsqt" path="res://shaders/monster_vision.gdshader" id="2_icmfn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_avg5r"]
@@ -22,7 +22,12 @@ glow_enabled = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pyrdw"]
 render_priority = 0
 shader = ExtResource("2_icmfn")
-shader_parameter/sonic_pulse_width = 5.0
+shader_parameter/pulse_radius = 4.43
+shader_parameter/visible_radius = 10.0
+shader_parameter/visible_radius_start_feather = 10.0
+shader_parameter/visible_radius_end_feather = 1.0
+shader_parameter/pulse_brightness = 10000.0
+shader_parameter/sonic_pulse_width = 0.0850000040375
 
 [sub_resource type="QuadMesh" id="QuadMesh_hnl6g"]
 material = SubResource("ShaderMaterial_pyrdw")
@@ -146,7 +151,7 @@ shadow_enabled = true
 slide_on_ceiling = false
 platform_floor_layers = 4294967293
 platform_wall_layers = 2
-script = ExtResource("1_avg5r")
+script = ExtResource("1_icmfn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=871534697]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
