@@ -4,14 +4,17 @@ render_mode unshaded, fog_disabled;
 
 const float VIEW_DISTANCE = 30.0;
 
+uniform vec3 pulse_start_point = vec3(0.0);
+
 uniform float pulse_radius = 0.0;
+uniform float pulse_brightness = 0.0;
+uniform float sonic_pulse_width : hint_range(0.0, 1.0, 0.001) = 0.1;
+
+uniform float environment_visibility : hint_range(0.0, 1.0, 0.001) = 0.0;
+
 uniform float visible_radius = 0.0;
 uniform float visible_radius_start_feather = 10.0;
 uniform float visible_radius_end_feather = 1.0;
-
-uniform float pulse_brightness = 0.0;
-
-uniform float sonic_pulse_width : hint_range(0.0, 1.0, 0.001) = 0.1;
 
 uniform sampler2D screen_texture : hint_screen_texture;
 uniform sampler2D depth_texture : hint_depth_texture;
@@ -39,13 +42,16 @@ float visibility_for_distance(float distance_from_start, float radius, float sta
 		radius, 
 		distance_from_start
 	);
+	//return visibility_start;
 	float visibility_end = 1.0 - smoothstep(
 		radius,
 		radius + end_feather,
 		distance_from_start
 	);
-	
-	return visibility_start * visibility_end;
+	//
+	//return visibility_end;
+	//
+	return visibility_start * visibility_end * environment_visibility;
 }
 
 void fragment() {
@@ -54,10 +60,12 @@ void fragment() {
 	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
 	view.xyz /= view.w;
 	float linear_depth = -view.z;
-	float distance_from_center = length(vec3(view.xy, linear_depth));
+	//float distance_from_center = length(vec3(view.xy, linear_depth));
 	
 	vec4 world = INV_VIEW_MATRIX * INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
 	vec3 world_position = world.xyz / world.w;
+	
+	float dist = distance(world_position, pulse_start_point);
 	
 	//ALBEDO.rgb = vec3(fract(linear_depth));
 	
@@ -69,13 +77,13 @@ void fragment() {
 	vec3 view_normal = normal_roughness.rgb * 2.0 - 1.0;
 	
 	vec3 visibility_color = vec3(visibility_for_distance(
-		distance_from_center, 
+		dist, 
 		visible_radius, 
 		visible_radius_start_feather, 
 		visible_radius_end_feather
 	));
 	
-	float dist = distance(world_position, CAMERA_POSITION_WORLD);
+	//float dist = distance(world_position, CAMERA_POSITION_WORLD);
 	float mix_ratio = 0.0;
 	
 	//float radius = fract(TIME / 2.0) * VIEW_DISTANCE;
@@ -83,6 +91,7 @@ void fragment() {
 		mix_ratio = 1.0 - (pulse_radius - dist);
 		
 		mix_ratio = clamp(mix_ratio, 0.0, 1.0);
+		//visibility_color = max(visibility_color, vec3(mix_ratio)); // Try this
 	}
 	
 	// view_normal is now the normal vector in view/camera space!

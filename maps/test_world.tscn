@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://64plbj0vqw8h"]
 
-[ext_resource type="Script" uid="uid://cyio6vy6bmq2u" path="res://characters/shared/player_controller.gd" id="1_icmfn"]
-[ext_resource type="Shader" uid="uid://v8a20qinjsqt" path="res://shaders/monster_vision.gdshader" id="2_icmfn"]
+[ext_resource type="PackedScene" uid="uid://bnlptqyesj2l7" path="res://characters/monster/monster.tscn" id="1_avg5r"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_avg5r"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -14,25 +13,6 @@ sky_material = SubResource("ProceduralSkyMaterial_avg5r")
 background_mode = 2
 sky = SubResource("Sky_icmfn")
 glow_enabled = true
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hnl6g"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_hnl6g"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pyrdw"]
-render_priority = 0
-shader = ExtResource("2_icmfn")
-shader_parameter/pulse_radius = 4.43
-shader_parameter/visible_radius = 10.0
-shader_parameter/visible_radius_start_feather = 10.0
-shader_parameter/visible_radius_end_feather = 1.0
-shader_parameter/pulse_brightness = 10000.0
-shader_parameter/sonic_pulse_width = 0.0850000040375
-
-[sub_resource type="QuadMesh" id="QuadMesh_hnl6g"]
-material = SubResource("ShaderMaterial_pyrdw")
-flip_faces = true
-size = Vector2(2, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7m6vp"]
 
@@ -147,29 +127,7 @@ environment = SubResource("Environment_7m6vp")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1286854380]
-slide_on_ceiling = false
-platform_floor_layers = 4294967293
-platform_wall_layers = 2
-script = ExtResource("1_icmfn")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=871534697]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_hnl6g")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=1441635034]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_hnl6g")
-
-[node name="CameraPivot" type="Node3D" parent="CharacterBody3D" unique_id=458559146]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/CameraPivot" unique_id=757994297]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/CameraPivot/Camera3D" unique_id=166297197]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0562007e-08, 0, -0.23520195)
-mesh = SubResource("QuadMesh_hnl6g")
+[node name="Monster" parent="." unique_id=1734781553 instance=ExtResource("1_avg5r")]
 
 [node name="Obstacle" type="Node3D" parent="." unique_id=2050717077]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.579626, 0.5493094, -7.2723646)
@@ -181,3 +139,5 @@ mesh = SubResource("BoxMesh_7m6vp")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Obstacle" unique_id=425871912]
 process_material = SubResource("ParticleProcessMaterial_hnl6g")
 draw_pass_1 = SubResource("QuadMesh_pyrdw")
+
+[editable path="Monster"]

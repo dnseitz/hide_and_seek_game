@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c4tbskn46gggw"]
+
+[ext_resource type="Script" uid="uid://djh4t2an5wjbw" path="res://characters/monster/monster_controller.gd" id="1_2k8j5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hnl6g"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hnl6g"]
+
+[node name="PlayerController" type="CharacterBody3D" unique_id=1734781553]
+slide_on_ceiling = false
+platform_floor_layers = 4294967293
+platform_wall_layers = 2
+script = ExtResource("1_2k8j5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1967066756]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_hnl6g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1586919118]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_hnl6g")
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=859340521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

@@ -1,4 +1,4 @@
-class_name PlayerController extends CharacterBody3D
+@abstract class_name PlayerController extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -11,7 +11,6 @@ const JUMP_VELOCITY = 4.5
 @export var tilt_lower_limit := -PI / 6.0
 
 @onready var _camera_pivot: Node3D = $CameraPivot
-@onready var _camera: Camera3D = $CameraPivot/Camera3D
 
 var _cam_input_direction := Vector2.ZERO
 
