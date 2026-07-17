@@ -1,16 +1,152 @@
 [gd_scene format=3 uid="uid://d15k3ri2s6pqa"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pyrdw"]
-transparency = 1
-albedo_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
-emission_enabled = true
-emission = Color(18.892157, 0, 0, 1)
-emission_energy_multiplier = 16.0
+[ext_resource type="Material" uid="uid://hnccpexp3etq" path="res://environment/monster_vision_effects/monster_vision_loud_noise/materials/monster_vision_loud_noise_material.tres" id="1_dfntj"]
+[ext_resource type="Script" uid="uid://2odg17ltyrdv" path="res://environment/monster_vision_effects/monster_vision_loud_noise/monster_vision_loud_noise.gd" id="1_mbrm3"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_hnl6g"]
-material = SubResource("StandardMaterial3D_pyrdw")
+[sub_resource type="Curve" id="Curve_tfiqp"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.40220386, 1), 0.0, 0.0, 0, 0, Vector2(0.7493113, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_nji6i"]
+texture_mode = 1
+curve = SubResource("Curve_tfiqp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hnl6g"]
+lifetime_randomness = 0.4
+emission_shape = 2
+emission_sphere_radius = 0.5
+direction = Vector3(0, 1, 0)
+spread = 60.0
+initial_velocity_min = 0.049999997
+initial_velocity_max = 0.099999994
+gravity = Vector3(0, 0, 0)
+color = Color(3682719500000, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_nji6i")
+
+[sub_resource type="Gradient" id="Gradient_ue31n"]
+offsets = PackedFloat32Array(0.85552406, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ddld7"]
+gradient = SubResource("Gradient_ue31n")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dfntj"]
+render_priority = 1
+transparency = 3
+alpha_hash_scale = 2.0
+alpha_antialiasing_mode = 0
+blend_mode = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("GradientTexture2D_ddld7")
+billboard_mode = 1
+billboard_keep_scale = true
+stencil_flags = 2
+stencil_reference = 2
+stencil_color = Color(1971108.5, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ddld7"]
+material = SubResource("StandardMaterial3D_dfntj")
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_hnl6g"]
+material = ExtResource("1_dfntj")
+
+[sub_resource type="Animation" id="Animation_mbrm3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1971108.5, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cqv5y"]
+resource_name = "make_noise"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666669),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1971108.5, 0, 0, 1), Color(1971108.5, 0, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles3D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.16666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"restart"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rky5s"]
+_data = {
+&"RESET": SubResource("Animation_mbrm3"),
+&"make_noise": SubResource("Animation_cqv5y")
+}
 
 [node name="MonsterVisionLoudNoise" type="Node3D" unique_id=923683297]
+script = ExtResource("1_mbrm3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=35218734]
-mesh = SubResource("SphereMesh_hnl6g")
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=600726013]
+unique_name_in_owner = true
+emitting = false
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.95
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_hnl6g")
+draw_pass_1 = SubResource("QuadMesh_ddld7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1703173380]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+mesh = SubResource("QuadMesh_hnl6g")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=415653863]
+libraries/ = SubResource("AnimationLibrary_rky5s")
+autoplay = &"make_noise"

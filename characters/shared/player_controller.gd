@@ -3,6 +3,13 @@
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
+@export_group("Movement")
+@export var _acceleration: float = 100.0
+@export var _deceleration: float = 100.0
+
+@export var _walk_speed: float = 5.0
+@export var _sprint_speed: float = 8.0
+
 @export_group("Mouse")
 # TODO: Pull this from settings menu
 @export var mouse_sensitivity: float = 0.25
@@ -32,6 +39,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	_cam_input_direction = mouse_motion_event.screen_relative * mouse_sensitivity
 
 func _physics_process(delta: float) -> void:
+	_handle_camera_input(delta)
+	_handle_movement_input(delta)
+
+func _handle_camera_input(delta: float) -> void:
 	_camera_pivot.rotation.x += _cam_input_direction.y * delta
 	_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, tilt_lower_limit, tilt_upper_limit)
 	rotation.y -= _cam_input_direction.x * delta
@@ -39,6 +50,7 @@ func _physics_process(delta: float) -> void:
 
 	_cam_input_direction = Vector2.ZERO
 
+func _handle_movement_input(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -50,11 +62,15 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir := Input.get_vector("move_right", "move_left", "move_back", "move_forward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var movement_speed := _get_target_movement_speed()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = move_toward(velocity.x, direction.x * movement_speed, _acceleration * delta)
+		velocity.z = move_toward(velocity.z, direction.z * movement_speed, _acceleration * delta)# direction.z * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, _deceleration * delta)
+		velocity.z = move_toward(velocity.z, 0, _deceleration * delta)
 
 	move_and_slide()
+
+func _get_target_movement_speed() -> float:
+	return _walk_speed

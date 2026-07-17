@@ -99,7 +99,7 @@ void fragment() {
 	//vec3 base_color = vec3(0.25) * normalize(view_normal) * 0.5 + 0.5;
 	//ALPHA = 1.0;
 	ALBEDO = visibility_color * mix(
-		base_color.rgb / 2.0, // * normal_roughness.w, -- Can use roughness channel for special effects in monster-mode
+		base_color.rgb / 2.0 * normal_roughness.w, // * normal_roughness.w, -- Can use roughness channel for special effects in monster-mode
 		vec3(pulse_brightness), 
 		mix_ratio
 	);

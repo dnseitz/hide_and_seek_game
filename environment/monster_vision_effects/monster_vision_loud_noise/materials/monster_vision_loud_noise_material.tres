@@ -1,0 +1,27 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://hnccpexp3etq"]
+
+[sub_resource type="Gradient" id="Gradient_ue31n"]
+offsets = PackedFloat32Array(0.85552406, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ddld7"]
+gradient = SubResource("Gradient_ue31n")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[resource]
+render_priority = 1
+transparency = 3
+alpha_hash_scale = 2.0
+alpha_antialiasing_mode = 0
+blend_mode = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(1971108.5, 0, 0, 1)
+albedo_texture = SubResource("GradientTexture2D_ddld7")
+billboard_mode = 1
+billboard_keep_scale = true
+stencil_flags = 2
+stencil_reference = 2
+stencil_color = Color(1971108.5, 0, 0, 1)

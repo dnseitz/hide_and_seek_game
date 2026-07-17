@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://c8l87swh2yxbo"]
+
+[ext_resource type="PackedScene" uid="uid://clf54tf4iad7e" path="res://environment/props/old_table/old_table.tscn" id="1_8t6pj"]
+[ext_resource type="PackedScene" uid="uid://diuwm3kkweyg8" path="res://environment/props/grandfather_clock/grandfather_clock.tscn" id="2_vpel3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ubfnb"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_icmfn"]
+sky_material = SubResource("ProceduralSkyMaterial_ubfnb")
+
+[sub_resource type="Environment" id="Environment_vlhsf"]
+background_mode = 2
+sky = SubResource("Sky_icmfn")
+glow_enabled = true
+
+[node name="HumanTestWorld" type="Node3D" unique_id=2089599980]
+
+[node name="GameEnvironment" type="Node3D" parent="." unique_id=279049115]
+
+[node name="Props" type="Node3D" parent="GameEnvironment" unique_id=636357367]
+
+[node name="old_table" parent="GameEnvironment/Props" unique_id=1110505060 instance=ExtResource("1_8t6pj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.484972, 2.3841858e-07, -3.140039)
+
+[node name="old_table2" parent="GameEnvironment/Props" unique_id=717022843 instance=ExtResource("1_8t6pj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.035862, 2.3841858e-07, -12.314231)
+
+[node name="old_table3" parent="GameEnvironment/Props" unique_id=1118634544 instance=ExtResource("1_8t6pj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.376495, 0, -5.9879527)
+
+[node name="old_table4" parent="GameEnvironment/Props" unique_id=2063047815 instance=ExtResource("1_8t6pj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.243683, 0, -3.3232536)
+
+[node name="old_table5" parent="GameEnvironment/Props" unique_id=392859394 instance=ExtResource("1_8t6pj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.206116, 0, -9.35363)
+
+[node name="grandfather_clock2" parent="GameEnvironment/Props" unique_id=1771752747 instance=ExtResource("2_vpel3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.983293, 0, -16.925331)
+
+[node name="grandfather_clock3" parent="GameEnvironment/Props" unique_id=1701827821 instance=ExtResource("2_vpel3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.429323, 0, -26.467566)
+
+[node name="grandfather_clock4" parent="GameEnvironment/Props" unique_id=1465831945 instance=ExtResource("2_vpel3")]
+transform = Transform3D(-0.9981403, 0, 0.060959104, 0.020770395, 0.94016236, 0.34009305, -0.057311457, 0.3407267, -0.9384139, 10.662309, 4.7683716e-07, -19.348335)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="GameEnvironment" unique_id=1416464619]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=1286865788]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+size = Vector3(100, 0.6, 100)
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=562265549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.75, 0)
+size = Vector3(100, 0.6, 100)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=1330053481]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7642517, 2.3184204, 19.13404)
+size = Vector3(18.690369, 5.636841, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=1162566248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.457048, 2.3184204, 12.161186)
+size = Vector3(18.690369, 5.636841, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=685237577]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -11.962237, 2.3184204, 10.101118)
+size = Vector3(19.227997, 5.636841, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=747612992]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -11.962237, 2.3184204, -8.87245)
+size = Vector3(19.227997, 5.636841, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=1651364224]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -4.02227, 2.3184204, -17.87467)
+size = Vector3(74.17852, 5.636841, 1)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=882818405]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 20.351326, 2.3184204, 17.551455)
+size = Vector3(43.071, 5.636841, 1)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=131771532]
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 24.223652, 2.3184204, 38.551453)
+size = Vector3(50.81565, 5.636841, 1)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=2014739083]
+transform = Transform3D(-2.1855695e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855695e-07, 49.131947, 2.3184204, -4.5806236)
+size = Vector3(87.40001, 5.636841, 1)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=1400907872]
+transform = Transform3D(-1, 0, 2.6226834e-07, 0, 1, 0, -2.6226834e-07, 0, -1, 0.9043999, 2.3184204, -48.872784)
+size = Vector3(97.095024, 5.636841, 1)
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=270054078]
+transform = Transform3D(3.0597974e-07, 0, 1, 0, 1, 0, -1, 0, 3.0597974e-07, -49.137486, 2.3184204, -4.4774227)
+size = Vector3(89.737404, 5.636841, 1)
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=1030697959]
+transform = Transform3D(1, 0, -3.4969113e-07, 0, 1, 0, 3.4969113e-07, 0, 1, -27.332115, 2.3184204, 38.489555)
+size = Vector3(45.35195, 5.636841, 1)
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=828891351]
+transform = Transform3D(0.8660254, 0.5, -3.028414e-07, -0.48488405, 0.8398439, 0.24402781, 0.122014165, -0.21133414, 0.9697682, -3.781663, 2.3184166, 39.04126)
+size = Vector3(2.7609005, 5.636841, 1)
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=1736080159]
+transform = Transform3D(0.8343151, -0.50740325, -0.21554625, 0.5376159, 0.835392, 0.11440887, 0.12201416, -0.21133412, 0.96976817, -2.159523, 2.2956002, 39.93355)
+size = Vector3(2.7609005, 5.6914673, 1)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=847254897]
+transform = Transform3D(-1, 0, 2.6226834e-07, 0, 1, 0, -2.6226834e-07, 0, -1, 7.192039, 6.067032, -28.467093)
+size = Vector3(4.2001, 13.134064, 3.5551758)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=1083965193]
+transform = Transform3D(-1, 0, 2.6226834e-07, 0, 1, 0, -2.6226834e-07, 0, -1, -2.9659247, 6.067032, -40.26634)
+size = Vector3(4.2001, 13.134064, 3.5551758)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=1522427727]
+transform = Transform3D(-1, 0, 2.6226834e-07, 0, 1, 0, -2.6226834e-07, 0, -1, 23.869167, 6.067032, -39.958084)
+size = Vector3(4.2001, 13.134064, 3.5551758)
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=9147926]
+transform = Transform3D(-1, 0, 2.6226834e-07, 0, 1, 0, -2.6226834e-07, 0, -1, -25.22871, 6.067032, -29.18718)
+size = Vector3(4.2001, 13.134064, 3.5551758)
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="GameEnvironment/CSGCombiner3D" unique_id=1268621889]
+transform = Transform3D(-1, 0, 2.6226834e-07, -1.8545173e-07, 0.70710677, -0.70710677, -1.8545173e-07, -0.70710677, -0.70710677, -16.1582, 4.3224707, -45.054897)
+size = Vector3(4.2001, 18.068428, 3.5551758)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="GameEnvironment" unique_id=1190615792]
+environment = SubResource("Environment_vlhsf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="GameEnvironment" unique_id=1063911967]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true

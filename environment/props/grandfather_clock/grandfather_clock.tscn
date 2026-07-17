@@ -6,6 +6,7 @@
 [ext_resource type="Shape3D" uid="uid://dkmf3llfaxxv1" path="res://environment/props/grandfather_clock/assets/collision_shapes/grandfather_clock_collision_shape.tres" id="5_sqbbk"]
 
 [node name="grandfather_clock2" type="RigidBody3D" unique_id=1771752747]
+mass = 30.0
 script = ExtResource("1_4nnbu")
 
 [node name="grandfather_clock" type="MeshInstance3D" parent="." unique_id=431768976]

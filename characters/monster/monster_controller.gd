@@ -16,6 +16,8 @@ const SHADER_VISIBLE_RADIUS_PARAM := "visible_radius"
 const SHADER_VISIBLE_RADIUS_START_FEATHER_PARAM := "visible_radius_start_feather"
 const SHADER_VISIBLE_RADIUS_END_FEATHER_PARAM := "visible_radius_end_feather"
 
+@export var _push_force: float = 5.0
+
 @onready var _monster_vision_post_processing_quad: MeshInstance3D = %MonsterVisionPostProcessingQuad
 
 # Vision Pulse
@@ -79,6 +81,8 @@ var _current_pulse_shapes_hit_rids: Array[RID] = []
 var _is_pulsing: bool = false
 
 func _ready() -> void:
+	get_viewport().use_debanding = true
+	RenderingServer.material_set_use_debanding(true)
 	var material := _monster_vision_post_processing_quad.mesh.surface_get_material(0)
 	assert(material is ShaderMaterial)
 
@@ -90,6 +94,17 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
+
+	# Push rigid bodies
+	for i in get_slide_collision_count():
+		var c := get_slide_collision(i)
+		var collider := c.get_collider()
+		if collider is RigidBody3D:
+			var rigid_body: RigidBody3D = collider
+			var contact_point := c.get_position()
+			var local_collision_position := contact_point - rigid_body.global_position
+			rigid_body.apply_impulse(-c.get_normal() * _push_force, local_collision_position)
+			# rigid_body.apply_central_impulse(-c.get_normal() * _push_force)
 
 	if _is_pulsing == false or _pulse_radius <= 0.0:
 		return

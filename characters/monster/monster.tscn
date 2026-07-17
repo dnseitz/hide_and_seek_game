@@ -6,12 +6,14 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pyrdw"]
 render_priority = 0
 shader = ExtResource("2_nyvr2")
+shader_parameter/pulse_start_point = Vector3(0, 0, 0)
 shader_parameter/pulse_radius = 4.2
+shader_parameter/pulse_brightness = 1000.0
+shader_parameter/sonic_pulse_width = 0.1
+shader_parameter/environment_visibility = 0.0
 shader_parameter/visible_radius = 30.0
 shader_parameter/visible_radius_start_feather = 30.0
 shader_parameter/visible_radius_end_feather = 1.005
-shader_parameter/pulse_brightness = 1000.0
-shader_parameter/sonic_pulse_width = 0.1
 
 [sub_resource type="QuadMesh" id="QuadMesh_7ouai"]
 material = SubResource("ShaderMaterial_pyrdw")
@@ -26,4 +28,5 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0
 [node name="MonsterVisionPostProcessingQuad" type="MeshInstance3D" parent="CameraPivot/Camera3D" index="0" unique_id=722458253]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0562007e-08, 0, -0.23520195)
+visible = false
 mesh = SubResource("QuadMesh_7ouai")

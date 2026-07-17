@@ -88,6 +88,7 @@ points = PackedVector3Array(-0.65911424, 0.8167286, -0.61812854, 0.20051584, 0.8
 [node name="old_table" type="RigidBody3D" unique_id=1110505060]
 collision_layer = 4
 collision_mask = 5
+mass = 10.0
 script = ExtResource("1_wf7f4")
 
 [node name="table" type="MeshInstance3D" parent="." unique_id=43645503]
