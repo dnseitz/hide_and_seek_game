@@ -21,7 +21,6 @@ gdscript/warnings/unsafe_property_access=2
 gdscript/warnings/unsafe_method_access=2
 gdscript/warnings/unsafe_cast=2
 gdscript/warnings/unsafe_call_argument=2
-gdscript/warnings/return_value_discarded=1
 gdscript/warnings/missing_await=1
 
 [display]
@@ -66,10 +65,13 @@ debug_esc={
 
 3d_physics/layer_1="ground"
 3d_physics/layer_2="wall"
+3d_physics/layer_3="environment_object"
+3d_physics/layer_4="monster_vision_environment_object"
 
 [physics]
 
 3d/physics_engine="Jolt Physics"
+common/physics_interpolation=true
 
 [rendering]
 

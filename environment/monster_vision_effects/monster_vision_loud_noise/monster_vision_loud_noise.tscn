@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://d15k3ri2s6pqa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pyrdw"]
+transparency = 1
+albedo_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+emission_enabled = true
+emission = Color(18.892157, 0, 0, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_hnl6g"]
+material = SubResource("StandardMaterial3D_pyrdw")
+
+[node name="MonsterVisionLoudNoise" type="Node3D" unique_id=923683297]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=35218734]
+mesh = SubResource("SphereMesh_hnl6g")

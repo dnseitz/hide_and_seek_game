@@ -1,10 +1,10 @@
 extends PlayerController
 
-const VISION_PULSE_IN_DURATION := 2.0
-const VISION_PULSE_OUT_DURATION := 2.0
+const VISION_PULSE_IN_DURATION := 0.5
+const VISION_PULSE_OUT_DURATION := 3.5
 const VISION_PULSE_TOTAL_DURATION := VISION_PULSE_IN_DURATION + VISION_PULSE_OUT_DURATION
 
-const VISION_PULSE_RADIUS := 30.0
+const VISION_PULSE_MAX_RADIUS := 30.0
 
 const SHADER_PULSE_START_POINT_PARAM := "pulse_start_point"
 
@@ -74,6 +74,8 @@ var _environment_visibility: float = 0.0:
 		_environment_visibility = new_value
 		_monster_vision_shader_material.set_shader_parameter(SHADER_ENVIRONMENT_VISIBILITY_PARAM, new_value)
 
+var _current_pulse_shapes_hit_rids: Array[RID] = []
+
 var _is_pulsing: bool = false
 
 func _ready() -> void:
@@ -82,17 +84,40 @@ func _ready() -> void:
 
 	_monster_vision_shader_material = material
 
-	_visibility_radius = 0.0
-	_pulse_radius = 0.0
-	_pulse_brightness = 0.0
-	_environment_visibility = 0.0
-	_visibility_start_fade = 0.0
-	_visibility_end_fade = 0.0
-	_is_pulsing = false
+	_monster_vision_post_processing_quad.visible = true
 
-	# _visibility_radius = 50.0
-	# _visibility_start_fade = 200.0
-	# _visibility_end_fade = 10.0
+	_reset_pulse_parameters()
+
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
+
+	if _is_pulsing == false or _pulse_radius <= 0.0:
+		return
+
+	var space_state := get_world_3d().direct_space_state
+
+	var sphere_shape := SphereShape3D.new()
+	sphere_shape.radius = _pulse_radius
+
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.shape = sphere_shape
+	query.collision_mask = 1 << 3 # monster vision environment object layer
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
+	query.transform = Transform3D(Basis(), _pulse_start_point)
+	query.motion = Vector3.ZERO
+	query.exclude = _current_pulse_shapes_hit_rids
+
+	var result: Array[Dictionary] = space_state.intersect_shape(query)
+
+	if result.size() > 0:
+		for hit in result:
+			var collider: CollisionObject3D = hit["collider"]
+			_current_pulse_shapes_hit_rids.append(collider.get_rid())
+			var parent: Node = collider.get_parent()
+			if parent is MonsterEnvironmentVisionEmitter:
+				var emitter: MonsterEnvironmentVisionEmitter = parent
+				emitter.hit_by_pulse(_pulse_radius / VISION_PULSE_MAX_RADIUS)
 
 func _input(event: InputEvent) -> void:
 	super._input(event)
@@ -111,7 +136,7 @@ func _input(event: InputEvent) -> void:
 		var pulse_radius_tween := create_tween()
 		var pulse_brightness_tween := create_tween()
 
-		pulse_radius_tween.tween_property(self, "_pulse_radius", VISION_PULSE_RADIUS, VISION_PULSE_IN_DURATION)
+		pulse_radius_tween.tween_property(self, "_pulse_radius", VISION_PULSE_MAX_RADIUS, VISION_PULSE_IN_DURATION)
 		pulse_brightness_tween.tween_property(self, "_pulse_brightness", 1000.0, VISION_PULSE_IN_DURATION / 2.0)
 		pulse_brightness_tween.chain().tween_property(self, "_pulse_brightness", 0.0, VISION_PULSE_IN_DURATION / 2.0)
 		pulse_radius_tween.chain().tween_callback(func() -> void:
@@ -121,19 +146,26 @@ func _input(event: InputEvent) -> void:
 		var visibility_tween := create_tween()
 
 		visibility_tween.tween_property(self, "_environment_visibility", 1.0, VISION_PULSE_IN_DURATION / 4.0)
-		visibility_tween.parallel().tween_property(self, "_visibility_radius", VISION_PULSE_RADIUS, VISION_PULSE_IN_DURATION)
-		visibility_tween.parallel().tween_property(self, "_visibility_start_fade", VISION_PULSE_RADIUS * 2.0, VISION_PULSE_IN_DURATION) 
-		visibility_tween.parallel().tween_property(self, "_visibility_end_fade", VISION_PULSE_RADIUS / 4.0, VISION_PULSE_IN_DURATION)
+		visibility_tween.parallel().tween_property(self, "_visibility_radius", VISION_PULSE_MAX_RADIUS, VISION_PULSE_IN_DURATION)
+		visibility_tween.parallel().tween_property(self, "_visibility_start_fade", VISION_PULSE_MAX_RADIUS * 2.0, VISION_PULSE_IN_DURATION) 
+		visibility_tween.parallel().tween_property(self, "_visibility_end_fade", VISION_PULSE_MAX_RADIUS / 2.0, VISION_PULSE_IN_DURATION)
 
 		visibility_tween.chain().tween_property(self, "_environment_visibility", 0.0, VISION_PULSE_OUT_DURATION)
 		visibility_tween.parallel().tween_property(self, "_visibility_end_fade", 0.0, VISION_PULSE_OUT_DURATION)
 		visibility_tween.parallel().tween_property(self, "_visibility_start_fade", 0.0, VISION_PULSE_OUT_DURATION)
 
 		visibility_tween.chain().tween_callback(func() -> void:
-			_visibility_radius = 0.0
-			_pulse_radius = 0.0
-			_visibility_start_fade = 0.0
-			_visibility_end_fade = 0.0
-			_is_pulsing = false
+			_reset_pulse_parameters()
 			print("END PULSE")
 		)
+
+func _reset_pulse_parameters() -> void:
+	_visibility_radius = 0.0
+	_pulse_start_point = Vector3.ZERO
+	_pulse_radius = 0.0
+	_pulse_brightness = 0.0
+	_environment_visibility = 0.0
+	_visibility_start_fade = 0.0
+	_visibility_end_fade = 0.0
+	_current_pulse_shapes_hit_rids = []
+	_is_pulsing = false

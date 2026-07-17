@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://w43p7ms4c7lx"]
+
+[ext_resource type="Script" uid="uid://bg2vepbtw0ylx" path="res://environment/monster_vision_effects/monster_vision_environment_object/monster_vision_environment_object.gd" id="1_f74gr"]
+
+[sub_resource type="Curve" id="Curve_k4d5f"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.049586773, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ko2w6"]
+curve = SubResource("Curve_k4d5f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f74gr"]
+resource_local_to_scene = true
+lifetime_randomness = 0.5
+emission_shape_scale = Vector3(1.2, 1.2, 1.2)
+emission_shape = 4
+emission_point_count = 512
+spread = 180.0
+initial_velocity_min = 0.099999994
+initial_velocity_max = 0.5
+gravity = Vector3(0, 0, 0)
+color = Color(3682719500000, 3682719500000, 3682719500000, 1)
+alpha_curve = SubResource("CurveTexture_ko2w6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvvmy"]
+render_priority = 1
+transparency = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_440tr"]
+material = SubResource("StandardMaterial3D_gvvmy")
+radius = 0.05
+height = 0.1
+
+[node name="MonsterVisionEnvironmentObject" type="Node3D" unique_id=522734137]
+script = ExtResource("1_f74gr")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=83234265]
+unique_name_in_owner = true
+emitting = false
+amount = 16
+lifetime = 3.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_f74gr")
+draw_pass_1 = SubResource("SphereMesh_440tr")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1940508316]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=175376923]
+unique_name_in_owner = true
+debug_color = Color(0.89666045, 0.00019868375, 0.7760379, 0.41960785)
