@@ -38,13 +38,23 @@ extends PlayerController
 		if is_node_ready():
 			_monster_vision_post_processing_quad.visible = !_debug_monster_vision_disabled
 
+## The post-processing quad used to show "monster vision"
 @onready var _monster_vision_post_processing_quad: MeshInstance3D = %MonsterVisionPostProcessingQuad
+
+@onready var _monster_input_controller: MonsterInputController = %MonsterInputController
 
 func _ready() -> void:
 	super._ready()
 
 	_monster_vision_post_processing_quad.visible = !_debug_monster_vision_disabled
 	_set_environment_props_mesh_visibile(_debug_environment_prop_meshes_visible)
+
+	_monster_input_controller.vision_pulse_started.connect(func() -> void:
+		print("VISION PULSE STARTED")
+	)
+	_monster_input_controller.vision_pulse_ended.connect(func() -> void:
+		print("VISION PULSE ENDED")
+	)
 
 func _physics_process(delta: float) -> void:
 	# Get speed before calculating updated velocity
@@ -76,7 +86,12 @@ func _physics_process(delta: float) -> void:
 				print("IMPULSE: ", impulse)
 
 				rigid_body.apply_impulse(impulse, local_collision_position)
-				# rigid_body.apply_central_impulse(-c.get_normal() * _push_force)
+
+func _get_target_movement_speed() -> float:
+	if _monster_input_controller.get_is_pulsing():
+		return _walk_speed * 0.5
+	
+	return super._get_target_movement_speed()
 
 func _set_environment_props_mesh_visibile(prop_visible: bool) -> void:
 	for child in get_tree().get_nodes_in_group(EnvironmentProp.GROUP_NAME):

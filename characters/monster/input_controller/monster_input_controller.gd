@@ -1,4 +1,4 @@
-@tool extends Node3D
+@tool class_name MonsterInputController extends Node3D
 
 const VISION_PULSE_IN_DURATION := 0.5
 const VISION_PULSE_OUT_DURATION := 3.5
@@ -15,6 +15,9 @@ const SHADER_ENVIRONMENT_VISIBILITY_PARAM := "environment_visibility"
 const SHADER_VISIBLE_RADIUS_PARAM := "visible_radius"
 const SHADER_VISIBLE_RADIUS_START_FEATHER_PARAM := "visible_radius_start_feather"
 const SHADER_VISIBLE_RADIUS_END_FEATHER_PARAM := "visible_radius_end_feather"
+
+signal vision_pulse_started
+signal vision_pulse_ended
 
 @export var _monster_vision_post_processing_quad: MeshInstance3D:
 	set(new_value):
@@ -136,12 +139,14 @@ func _input(event: InputEvent) -> void:
 
 	# TODO: Make pulse button re-bindable in settings
 	if _is_pulsing == false and mouse_button_event.button_index == MOUSE_BUTTON_RIGHT and mouse_button_event.is_released():
-		print("START PULSE!")
 		_is_pulsing = true
+		vision_pulse_started.emit()
 		_pulse_start_point = global_position
 
 		var pulse_radius_tween := create_tween()
+		pulse_radius_tween.set_ease(Tween.EASE_OUT)
 		var pulse_brightness_tween := create_tween()
+		pulse_brightness_tween.set_ease(Tween.EASE_OUT)
 
 		pulse_radius_tween.tween_property(self, "_pulse_radius", VISION_PULSE_MAX_RADIUS, VISION_PULSE_IN_DURATION)
 		pulse_brightness_tween.tween_property(self, "_pulse_brightness", 1000.0, VISION_PULSE_IN_DURATION / 2.0)
@@ -163,8 +168,11 @@ func _input(event: InputEvent) -> void:
 
 		visibility_tween.chain().tween_callback(func() -> void:
 			_reset_pulse_parameters()
-			print("END PULSE")
+			vision_pulse_ended.emit()
 		)
+
+func get_is_pulsing() -> bool:
+	return _is_pulsing
 
 func _reset_pulse_parameters() -> void:
 	_visibility_radius = 0.0
