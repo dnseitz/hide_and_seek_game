@@ -69,3 +69,9 @@ func _get_target_movement_speed() -> float:
 	if _input_controller.is_sprinting():
 		return _sprint_speed
 	return _walk_speed
+
+func _force_update_is_on_floor() -> void:
+	var old_velocity := velocity
+	velocity = Vector3.ZERO
+	move_and_slide()
+	velocity = old_velocity

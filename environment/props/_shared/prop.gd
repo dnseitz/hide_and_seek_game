@@ -1,4 +1,4 @@
-class_name EnvironmentProp extends Node3D
+class_name EnvironmentProp extends RigidBody3D
 
 const GROUP_NAME := &"environment_object"
 
