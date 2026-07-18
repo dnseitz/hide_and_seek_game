@@ -38,10 +38,18 @@ extends PlayerController
 		if is_node_ready():
 			_monster_vision_post_processing_quad.visible = !_debug_monster_vision_disabled
 
+var _monster_input_controller: MonsterInputController:
+	get:
+		return _input_controller as MonsterInputController
+
 ## The post-processing quad used to show "monster vision"
 @onready var _monster_vision_post_processing_quad: MeshInstance3D = %MonsterVisionPostProcessingQuad
 
-@onready var _monster_input_controller: MonsterInputController = %MonsterInputController
+func _get_configuration_warnings() -> PackedStringArray:
+	if _input_controller == null or _input_controller is MonsterInputController == false:
+		return ["Input controller must be set to an instance of MonsterInputController"]
+	
+	return []
 
 func _ready() -> void:
 	super._ready()
@@ -63,7 +71,7 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 
 	# Push rigid bodies when sprinting
-	if _is_sprinting():
+	if _monster_input_controller.is_sprinting():
 	# if current_speed > _walk_speed:
 		var push_force := _max_push_force
 		# 	current_speed,

@@ -1,4 +1,4 @@
-@tool class_name MonsterInputController extends Node3D
+@tool class_name MonsterInputController extends PlayerInputControllerBase
 
 const VISION_PULSE_IN_DURATION := 0.5
 const VISION_PULSE_OUT_DURATION := 3.5
