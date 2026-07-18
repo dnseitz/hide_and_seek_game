@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b543q6psbkw4s"]
+
+[ext_resource type="Script" uid="uid://c8317elou0a7s" path="res://environment/props/_shared/prop.gd" id="1_b3uq1"]
+[ext_resource type="PackedScene" uid="uid://w43p7ms4c7lx" path="res://environment/monster_vision_effects/monster_vision_environment_object/monster_vision_environment_object.tscn" id="1_y68mn"]
+
+[node name="Prop" type="RigidBody3D" unique_id=2146407058 groups=["environment_object"]]
+script = ExtResource("1_b3uq1")
+
+[node name="MonsterVisionEnvironmentObject" parent="." unique_id=522734137 instance=ExtResource("1_y68mn")]

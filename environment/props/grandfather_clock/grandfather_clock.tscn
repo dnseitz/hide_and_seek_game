@@ -1,19 +1,16 @@
-[gd_scene format=3 uid="uid://diuwm3kkweyg8"]
+[gd_scene format=3 uid="uid://cohyw8rksor46"]
 
-[ext_resource type="Script" uid="uid://c8317elou0a7s" path="res://environment/props/_shared/prop.gd" id="1_4nnbu"]
+[ext_resource type="PackedScene" uid="uid://b543q6psbkw4s" path="res://environment/props/_shared/prop.tscn" id="1_f8buf"]
 [ext_resource type="ArrayMesh" uid="uid://ntjpmyrr7sc6" path="res://environment/props/grandfather_clock/assets/meshes/grandfather_clock_body_clock_0.res" id="2_qyqvt"]
-[ext_resource type="PackedScene" uid="uid://w43p7ms4c7lx" path="res://environment/monster_vision_effects/monster_vision_environment_object/monster_vision_environment_object.tscn" id="5_ptpas"]
 [ext_resource type="Shape3D" uid="uid://dkmf3llfaxxv1" path="res://environment/props/grandfather_clock/assets/collision_shapes/grandfather_clock_collision_shape.tres" id="5_sqbbk"]
 
-[node name="grandfather_clock2" type="RigidBody3D" unique_id=1771752747]
-mass = 30.0
-script = ExtResource("1_4nnbu")
+[node name="GrandfatherClock" unique_id=2146407058 instance=ExtResource("1_f8buf")]
 
-[node name="grandfather_clock" type="MeshInstance3D" parent="." unique_id=431768976]
+[node name="MonsterVisionEnvironmentObject" parent="." index="0" unique_id=522734137 node_paths=PackedStringArray("_mesh_instance")]
+_mesh_instance = NodePath("../grandfather_clock")
+
+[node name="grandfather_clock" type="MeshInstance3D" parent="." index="1" unique_id=641886271]
 mesh = ExtResource("2_qyqvt")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1811902222]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2" unique_id=498802231]
 shape = ExtResource("5_sqbbk")
-
-[node name="MonsterVisionEnvironmentObject" parent="." unique_id=522734137 node_paths=PackedStringArray("_mesh_instance") instance=ExtResource("5_ptpas")]
-_mesh_instance = NodePath("../grandfather_clock")

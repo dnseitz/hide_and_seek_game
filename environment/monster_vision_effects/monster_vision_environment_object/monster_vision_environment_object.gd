@@ -60,7 +60,7 @@ func hit_by_pulse(distance_ratio: float) -> void:
 	var emission_offset_range := _clamped_remap(
 		distance_ratio,
 		0.2, 1.0,
-		0.0, 5.0
+		0.0, 2.5
 	)
 	_particle_process_material.emission_shape_scale = Vector3(emission_scale, emission_scale, emission_scale)
 	_particle_process_material.emission_shape_offset = Vector3(

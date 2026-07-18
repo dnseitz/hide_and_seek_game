@@ -21,6 +21,10 @@ const JUMP_VELOCITY = 4.5
 
 var _cam_input_direction := Vector2.ZERO
 
+func _ready() -> void:
+	# Left as a common override point in the future
+	pass
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("debug_left_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -72,5 +76,10 @@ func _handle_movement_input(delta: float) -> void:
 
 	move_and_slide()
 
+func _is_sprinting() -> bool:
+	return Input.is_action_pressed("sprint_modifier")
+
 func _get_target_movement_speed() -> float:
+	if _is_sprinting():
+		return _sprint_speed
 	return _walk_speed

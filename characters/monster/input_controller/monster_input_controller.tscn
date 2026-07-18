@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://tmxujxcjh72o"]
+
+[ext_resource type="Script" uid="uid://btomhfb33eq8y" path="res://characters/monster/input_controller/monster_input_controller.gd" id="1_3ipj8"]
+
+[node name="MonsterInputController" type="Node3D" unique_id=70782917]
+script = ExtResource("1_3ipj8")
