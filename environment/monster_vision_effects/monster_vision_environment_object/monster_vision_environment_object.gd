@@ -52,28 +52,38 @@ func _ready() -> void:
 ## - Paramter distance_ratio: A value between [0, 1] representing how close the object was
 ##     to the origin of the pulse vs the maximum range of the pulse.
 func hit_by_pulse(distance_ratio: float) -> void:
-	var emission_scale := remap(
+	var emission_scale := _clamped_remap(
 		distance_ratio,
-		0.0, 1.0,
+		0.2, 1.0,
 		1.0, 2.0
 	)
+	var emission_offset_range := _clamped_remap(
+		distance_ratio,
+		0.2, 1.0,
+		0.0, 5.0
+	)
 	_particle_process_material.emission_shape_scale = Vector3(emission_scale, emission_scale, emission_scale)
-	_particle_process_material.initial_velocity_min = remap(
+	_particle_process_material.emission_shape_offset = Vector3(
+		randf_range(-emission_offset_range, emission_offset_range),
+		randf_range(-emission_offset_range * 0.1, emission_offset_range * 0.1),
+		randf_range(-emission_offset_range, emission_offset_range)
+	)
+	_particle_process_material.initial_velocity_min = _clamped_remap(
 		distance_ratio,
 		0.0, 1.0,
-		0.05, 0.2
+		0.01, 0.2
 	)
-	_particle_process_material.initial_velocity_max = remap(
+	_particle_process_material.initial_velocity_max = _clamped_remap(
 		distance_ratio,
 		0.0, 1.0,
-		0.15, 0.5
+		0.10, 0.5
 	)
-	_particle_emitter.lifetime = remap(
+	_particle_emitter.lifetime = _clamped_remap(
 		distance_ratio,
 		0.0, 1.0,
 		5.0, 2.0
 	)
-	_particle_process_material.lifetime_randomness = remap(
+	_particle_process_material.lifetime_randomness = _clamped_remap(
 		distance_ratio,
 		0.0, 1.0,
 		0.1, 0.8
@@ -85,6 +95,13 @@ func _update_collision_bounding_box(mesh: Mesh) -> void:
 	box_shape.size = mesh.get_aabb().size
 	_collision_shape.shape = box_shape
 	_collision_shape.position = mesh.get_aabb().get_center()
+
+func _clamped_remap(value: float, istart: float, istop: float, ostart: float, ostop: float) -> float:
+	return clampf(remap(
+		value,
+		istart, istop,
+		ostart, ostop
+	), ostart, ostop)
 
 #region emission point generation
 func _update_emission_points(mesh: Mesh) -> void:

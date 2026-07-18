@@ -9,5 +9,4 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _on_loud_noise_timer_fired() -> void:
-	print("TIMER FIRED")
 	_test_loud_noise_emitter.emit_noise(1.0)

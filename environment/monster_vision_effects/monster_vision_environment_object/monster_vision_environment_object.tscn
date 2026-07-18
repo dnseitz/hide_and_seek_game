@@ -38,6 +38,7 @@ lifetime = 3.5
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
+visibility_aabb = AABB(-100, -100, -100, 200, 200, 200)
 process_material = SubResource("ParticleProcessMaterial_f74gr")
 draw_pass_1 = SubResource("QuadMesh_l45pw")
 
