@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://hsx4i5yipxbc"]
+
+[ext_resource type="Script" uid="uid://dr1wktw77qvqu" path="res://menu/main.gd" id="1_v88uf"]
+[ext_resource type="PackedScene" uid="uid://clo525rx34u3y" path="res://menu/main_menu/main_menu.tscn" id="2_4twx3"]
+
+[node name="Main" type="Node" unique_id=1567994796]
+script = ExtResource("1_v88uf")
+
+[node name="CurrentSceneContainer" type="Node" parent="." unique_id=933506611]
+unique_name_in_owner = true
+
+[node name="MainMenu" parent="CurrentSceneContainer" unique_id=667443978 instance=ExtResource("2_4twx3")]

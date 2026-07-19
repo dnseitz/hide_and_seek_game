@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://clo525rx34u3y"]
+
+[ext_resource type="Script" uid="uid://plf0brp3en24" path="res://menu/main_menu/main_menu.gd" id="1_q6idt"]
+
+[node name="MainMenu" type="Control" unique_id=667443978]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q6idt")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1697412422]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=798019438]
+layout_mode = 2
+alignment = 1
+
+[node name="HostButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=2022592152]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1023929917]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Join"

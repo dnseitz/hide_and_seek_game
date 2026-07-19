@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Hide And Seek"
+run/main_scene="uid://hsx4i5yipxbc"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -23,6 +24,8 @@ NetworkEvents="*uid://bdmobxxptryj0"
 NetworkPerformance="*uid://cqgf7aqmjfoa3"
 WindowTiler="*uid://cmqjajhjgffm1"
 NetworkSimulator="*uid://1y2ey1e6qjwr"
+MultiplayerManager="*uid://wcko3qeo2b1l"
+SceneSwitcher="*uid://bljofxft7x6kd"
 
 [debug]
 
