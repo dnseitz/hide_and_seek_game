@@ -22,6 +22,10 @@ glow_enabled = true
 [node name="TestWorld" type="Node3D" unique_id=1219635319]
 script = ExtResource("1_icmey")
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=470470726]
+_spawnable_scenes = PackedStringArray("uid://bnlptqyesj2l7", "uid://c8d2hslkrr2or")
+spawn_path = NodePath("..")
+
 [node name="GameEnvironment" type="Node3D" parent="." unique_id=1389088641]
 
 [node name="Props" type="Node3D" parent="GameEnvironment" unique_id=931871511]

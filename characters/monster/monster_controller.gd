@@ -60,10 +60,10 @@ func _ready() -> void:
 	_set_environment_props_mesh_visibile(_debug_environment_prop_meshes_visible)
 
 	_monster_input_controller.vision_pulse_started.connect(func() -> void:
-		print("VISION PULSE STARTED")
+		print(multiplayer.get_unique_id(), ": VISION PULSE STARTED")
 	)
 	_monster_input_controller.vision_pulse_ended.connect(func() -> void:
-		print("VISION PULSE ENDED")
+		print(multiplayer.get_unique_id(), ": VISION PULSE ENDED")
 	)
 
 func _physics_process(delta: float) -> void:

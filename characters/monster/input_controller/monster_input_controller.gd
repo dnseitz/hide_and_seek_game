@@ -38,6 +38,7 @@ var _pulse_start_point: Vector3:
 var _pulse_radius: float = 0.0:
 	set(new_value):
 		if _monster_vision_shader_material == null:
+			print("VALUE NOT SET")
 			return
 		
 		_pulse_radius = new_value
@@ -95,14 +96,20 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	get_viewport().use_debanding = true
-	RenderingServer.material_set_use_debanding(true)
+	super._ready()
+
+	# get_viewport().use_debanding = true
+	# RenderingServer.material_set_use_debanding(true)
+
 	_monster_vision_shader_material = _monster_vision_post_processing_quad.mesh.surface_get_material(0)
 	_monster_vision_post_processing_quad.visible = true
 
 	_reset_pulse_parameters()
 
 func _physics_process(_delta: float) -> void:
+	if is_multiplayer_authority() == false:
+		return
+
 	if _is_pulsing == false or _pulse_radius <= 0.0:
 		return
 
@@ -131,7 +138,17 @@ func _physics_process(_delta: float) -> void:
 				var emitter: MonsterEnvironmentVisionEmitter = parent
 				emitter.hit_by_pulse(_pulse_radius / VISION_PULSE_MAX_RADIUS)
 
+func _process(delta: float) -> void:
+	if is_multiplayer_authority() == false:
+		return
+
+	print(multiplayer.get_unique_id(), ": IS PULSING: ", _is_pulsing)
+	print(multiplayer.get_unique_id(), ": PULSE RADIUS: ", _pulse_radius)
+
 func _input(event: InputEvent) -> void:
+	if is_multiplayer_authority() == false:
+		return
+
 	if event is InputEventMouseButton == false:
 		return
 	

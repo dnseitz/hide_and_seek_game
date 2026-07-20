@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bysa76rcaibr"]
+
+[ext_resource type="Script" uid="uid://bdnn1uu47agvu" path="res://characters/human/input_controller/human_input_controller.gd" id="1_y01ks"]
+
+[node name="HumanInputController" type="Node3D" unique_id=938950882]
+script = ExtResource("1_y01ks")

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c4tbskn46gggw" path="res://characters/shared/player_controller_base.tscn" id="1_vhda2"]
 [ext_resource type="PackedScene" uid="uid://tmxujxcjh72o" path="res://characters/monster/input_controller/monster_input_controller.tscn" id="2_7ouai"]
 [ext_resource type="Shader" uid="uid://v8a20qinjsqt" path="res://shaders/monster_vision.gdshader" id="2_nyvr2"]
+[ext_resource type="Script" uid="uid://djh4t2an5wjbw" path="res://characters/monster/monster_controller.gd" id="2_xm3rn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pyrdw"]
 render_priority = 0
@@ -22,18 +23,22 @@ flip_faces = true
 size = Vector2(2, 2)
 
 [node name="Monster" unique_id=1734781553 node_paths=PackedStringArray("_input_controller") instance=ExtResource("1_vhda2")]
+script = ExtResource("2_xm3rn")
 _input_controller = NodePath("MonsterInputController")
 
-[node name="MonsterInputController" parent="." index="0" unique_id=70782917 node_paths=PackedStringArray("_monster_vision_post_processing_quad") instance=ExtResource("2_7ouai")]
+[node name="MonsterInputController" parent="." index="0" unique_id=70782917 node_paths=PackedStringArray("_monster_vision_post_processing_quad", "_camera") instance=ExtResource("2_7ouai")]
 unique_name_in_owner = true
 _monster_vision_post_processing_quad = NodePath("../CameraPivot/MonsterCamera3D/MonsterVisionPostProcessingQuad")
+_camera = NodePath("../CameraPivot/MonsterCamera3D")
 
 [node name="MonsterCamera3D" type="Camera3D" parent="CameraPivot" parent_id_path=PackedInt32Array(859340521) index="0" unique_id=1626468861]
 unique_name_in_owner = true
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 cull_mask = 3
+current = true
 
 [node name="MonsterVisionPostProcessingQuad" type="MeshInstance3D" parent="CameraPivot/MonsterCamera3D" index="0" unique_id=722458253]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0562007e-08, 0, -0.23520195)
+layers = 2
 mesh = SubResource("QuadMesh_7ouai")

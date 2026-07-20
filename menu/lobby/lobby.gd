@@ -33,5 +33,5 @@ func _on_peers_changed() -> void:
 
 func _on_start_pressed() -> void:
 	MultiplayerManager.will_start_loading_new_map()
-	MultiplayerManager.load_map.rpc("res://maps/monster_test_world/monster_test_world.tscn")
+	MultiplayerManager.load_map.rpc("res://maps/game_maps/01_test_map/01_test_map.tscn")
 #endregion

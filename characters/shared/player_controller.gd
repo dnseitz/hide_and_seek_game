@@ -33,8 +33,15 @@ func _input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _physics_process(delta: float) -> void:
+	if _input_controller.is_multiplayer_authority() == false:
+		return
+
 	_handle_camera_input(delta)
 	_handle_movement_input(delta)
+
+@rpc("call_local", "reliable")
+func set_player_input_authority(peer_id: int) -> void:
+	_input_controller.authority_peer_id = peer_id
 
 func _handle_camera_input(delta: float) -> void:
 	var cam_input_direction := _input_controller.consume_cam_input_direction()

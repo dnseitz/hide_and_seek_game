@@ -6,6 +6,8 @@ var _meshes: Array[MeshInstance3D] = []
 var _monster_vision_emitter: MonsterEnvironmentVisionEmitter
 
 func _ready() -> void:
+	if multiplayer.is_server() == false:
+		freeze = true
 	_meshes = []
 	for child in get_children():
 		if child is MeshInstance3D:

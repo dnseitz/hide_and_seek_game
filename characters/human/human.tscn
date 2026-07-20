@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c8d2hslkrr2or"]
+
+[ext_resource type="PackedScene" uid="uid://c4tbskn46gggw" path="res://characters/shared/player_controller_base.tscn" id="1_57amp"]
+[ext_resource type="Script" uid="uid://cbx1tw66y3lvt" path="res://characters/human/human_controller.gd" id="2_05gsu"]
+[ext_resource type="PackedScene" uid="uid://bysa76rcaibr" path="res://characters/human/input_controller/human_input_controller.tscn" id="3_h3nk5"]
+
+[node name="Human" unique_id=1734781553 node_paths=PackedStringArray("_input_controller") instance=ExtResource("1_57amp")]
+script = ExtResource("2_05gsu")
+_input_controller = NodePath("HumanInputController")
+
+[node name="HumanInputController" parent="." index="0" unique_id=938950882 node_paths=PackedStringArray("_camera") instance=ExtResource("3_h3nk5")]
+_camera = NodePath("../CameraPivot/Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" parent_id_path=PackedInt32Array(859340521) index="0" unique_id=578326789]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+cull_mask = 5
