@@ -37,6 +37,7 @@ input_properties = Array[String](["MonsterInputController:movement_input_directi
 
 [node name="MonsterCamera3D" type="Camera3D" parent="CameraPivot" parent_id_path=PackedInt32Array(859340521) index="0" unique_id=1626468861]
 unique_name_in_owner = true
+physics_interpolation_mode = 2
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 cull_mask = 3
 current = true

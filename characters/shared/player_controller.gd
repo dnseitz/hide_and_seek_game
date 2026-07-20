@@ -29,10 +29,11 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
+	# Camera input is handled locally, otherwise looking around feels very jittery on remote clients
+	# as it needs to reconcile with the server's view of the camera rotation.
 	_handle_camera_input(delta)
 
 func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
-	# _handle_camera_input(delta)
 	_handle_movement_input(delta)
 
 func _input(event: InputEvent) -> void:
@@ -40,13 +41,6 @@ func _input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	elif event.is_action_released("debug_esc"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
-# func _physics_process(delta: float) -> void:
-# 	if _input_controller.is_multiplayer_authority() == false:
-# 		return
-
-# 	_handle_camera_input(delta)
-# 	_handle_movement_input(delta)
 
 @rpc("call_local", "reliable")
 func set_player_input_authority(peer_id: int) -> void:
@@ -58,7 +52,6 @@ func _handle_camera_input(delta: float) -> void:
 	_camera_pivot.rotation.x += cam_input_direction.y * delta
 	_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, tilt_lower_limit, tilt_upper_limit)
 	rotation.y -= cam_input_direction.x * delta
-	# _camera_pivot.rotation.y -= _cam_input_direction.x * delta
 
 func _handle_movement_input(delta: float) -> void:
 	# Add the gravity.
@@ -71,7 +64,6 @@ func _handle_movement_input(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir := _input_controller.movement_input_direction
-	# var input_dir := _input_controller.get_movement_input_direction()
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	var movement_speed := _get_target_movement_speed()
 	if direction:
@@ -87,7 +79,6 @@ func _handle_movement_input(delta: float) -> void:
 
 func _get_target_movement_speed() -> float:
 	if _input_controller.is_sprinting:
-	# if _input_controller.is_sprinting():
 		return _sprint_speed
 	return _walk_speed
 
