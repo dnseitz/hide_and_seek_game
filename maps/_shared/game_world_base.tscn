@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dw10skonq20si"]
+
+[ext_resource type="Script" uid="uid://v3f03yo1vd8x" path="res://maps/_shared/game_world_base.gd" id="1_gup3m"]
+
+[node name="GameWorldBase" type="Node3D" unique_id=447505545]
+script = ExtResource("1_gup3m")

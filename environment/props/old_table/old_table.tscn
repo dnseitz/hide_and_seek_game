@@ -90,6 +90,7 @@ points = PackedVector3Array(-0.65911424, 0.8167286, -0.61812854, 0.20051584, 0.8
 _mesh_instance = NodePath("../table")
 
 [node name="table" type="MeshInstance3D" parent="." index="1" unique_id=1185519981]
+layers = 4
 mesh = SubResource("ArrayMesh_02sta")
 
 [node name="CollisionShape3D10" type="CollisionShape3D" parent="." index="2" unique_id=996483691]

@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Constants="*uid://bp1871feetjp2"
 NetworkTime="*uid://cnqdxyjptkfvp"
 NetworkTimeSynchronizer="*uid://5rmn2ik3kjo8"
 NetworkRollback="*uid://gas743comroj"
@@ -89,6 +90,9 @@ sprint_modifier={
 
 [layer_names]
 
+3d_render/layer_1="global_visibility"
+3d_render/layer_2="monster_visibility"
+3d_render/layer_3="human_visibility"
 3d_physics/layer_1="ground"
 3d_physics/layer_2="wall"
 3d_physics/layer_3="environment_object"

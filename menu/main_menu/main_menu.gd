@@ -16,7 +16,7 @@ func _on_host_pressed() -> void:
 		return
 	
 	print("SUCCESSFULLY STARTED SERVER")
-	SceneSwitcher.switch_scene("res://menu/lobby/lobby.tscn")
+	await SceneSwitcher.switch_scene("res://menu/lobby/lobby.tscn")
 
 func _on_join_pressed() -> void:
 	var error := MultiplayerManager.join("localhost")
@@ -25,5 +25,5 @@ func _on_join_pressed() -> void:
 		return
 
 	print("SUCCESSFULLY JOINED SERVER")
-	SceneSwitcher.switch_scene("res://menu/lobby/lobby.tscn")
+	await SceneSwitcher.switch_scene("res://menu/lobby/lobby.tscn")
 #endregion

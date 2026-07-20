@@ -9,7 +9,11 @@ func _ready() -> void:
 	_update_player_list()
 	MultiplayerManager.peers_changed.connect(_on_peers_changed)
 
-	_start_button.pressed.connect(_on_start_pressed)
+	if multiplayer.is_server():
+		_start_button.visible = true
+		_start_button.pressed.connect(_on_start_pressed)
+	else:
+		_start_button.visible = false
 
 func _update_player_list() -> void:
 	var peers := MultiplayerManager.get_peers()
@@ -28,5 +32,6 @@ func _on_peers_changed() -> void:
 	_update_player_list()
 
 func _on_start_pressed() -> void:
-	SceneSwitcher.switch_scene("res://maps/monster_test_world/monster_test_world.tscn")
+	MultiplayerManager.will_start_loading_new_map()
+	MultiplayerManager.load_map.rpc("res://maps/monster_test_world/monster_test_world.tscn")
 #endregion

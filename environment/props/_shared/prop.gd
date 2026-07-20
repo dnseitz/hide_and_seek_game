@@ -9,12 +9,10 @@ func _ready() -> void:
 	_meshes = []
 	for child in get_children():
 		if child is MeshInstance3D:
-			_meshes.append(child)
+			var mesh: MeshInstance3D = child
+			mesh.layers = Constants.Visibility.HUMAN_VISION_LAYER
+			_meshes.append(mesh)
 		elif child is MonsterEnvironmentVisionEmitter:
 			if _monster_vision_emitter != null:
 				push_warning("Multiple monster vision emitters found")
 			_monster_vision_emitter = child
-
-func make_meshes_visible(mesh_visible: bool) -> void:
-	for mesh in _meshes:
-		mesh.visible = mesh_visible

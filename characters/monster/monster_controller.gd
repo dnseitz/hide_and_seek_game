@@ -42,6 +42,8 @@ var _monster_input_controller: MonsterInputController:
 	get:
 		return _input_controller as MonsterInputController
 
+@onready var _monster_camera: Camera3D = %MonsterCamera3D
+
 ## The post-processing quad used to show "monster vision"
 @onready var _monster_vision_post_processing_quad: MeshInstance3D = %MonsterVisionPostProcessingQuad
 
@@ -89,9 +91,6 @@ func _physics_process(delta: float) -> void:
 				var impulse := -c.get_normal() * push_force * current_speed
 				# Launch objects upwards cause it looks cooler :^)
 				impulse.y = abs(impulse.y * 1.5)
-				print("SPEED: ", current_speed)
-				print("PUSH FORCE: ", push_force)
-				print("IMPULSE: ", impulse)
 
 				rigid_body.apply_impulse(impulse, local_collision_position)
 
@@ -102,10 +101,7 @@ func _get_target_movement_speed() -> float:
 	return super._get_target_movement_speed()
 
 func _set_environment_props_mesh_visibile(prop_visible: bool) -> void:
-	for child in get_tree().get_nodes_in_group(EnvironmentProp.GROUP_NAME):
-		if child is EnvironmentProp == false:
-			push_error("Node in %s group but is not a type of `EnvironmentProp`" % EnvironmentProp.GROUP_NAME)
-			continue
-		
-		var environment_prop: EnvironmentProp = child
-		environment_prop.make_meshes_visible(prop_visible)
+	if prop_visible:
+		_monster_camera.cull_mask |= Constants.Visibility.HUMAN_VISION_LAYER
+	else:
+		_monster_camera.cull_mask &= ~Constants.Visibility.HUMAN_VISION_LAYER

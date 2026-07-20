@@ -26,6 +26,8 @@ class PeerInfo extends RefCounted:
 var _current_peer_info := PeerInfo.new(UNCONNECTED_PEER_ID)
 var _connected_peers: Dictionary[int, PeerInfo]
 
+var _loaded_players: Array[int] = []
+
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
@@ -71,6 +73,38 @@ func get_peers() -> Array[PeerInfo]:
 	)
 	return peers
 
+func will_start_loading_new_map() -> void:
+	if multiplayer.is_server() == false:
+		return
+
+	_loaded_players = []
+
+@rpc("call_local", "reliable")
+func load_map(file_path: String) -> void:
+	print("PEER ID: %d - LOAD MAP STARTED" % multiplayer.get_unique_id())
+	await SceneSwitcher.show_loading_screen()
+	await SceneSwitcher.switch_scene(file_path)
+
+	loading_finished.rpc_id(HOST_PEER_ID)
+
+@rpc("any_peer", "call_local", "reliable")
+func loading_finished() -> void:
+	if multiplayer.is_server() == false:
+		return
+	
+	_loaded_players.append(multiplayer.get_remote_sender_id())
+
+	if _loaded_players.size() >= _connected_peers.size() and _loaded_players.all(func(peer_id: int) -> bool:
+		return _connected_peers.has(peer_id)
+	):
+		var loaded_map := SceneSwitcher.get_current_scene()
+		if loaded_map is GameWorldBase == false:
+			push_error("Unexpected map loaded, must be subclass of `GameWorldBase`")
+			return
+		var game_world: GameWorldBase = loaded_map	
+
+		game_world.start_game()
+
 @rpc("any_peer", "reliable")
 func _register_peer(peer_id: int, peer_name: String) -> void:
 	var peer_info := PeerInfo.new(peer_id)
@@ -99,6 +133,7 @@ func _on_peer_connected(peer_id: int) -> void:
 
 func _on_peer_disconnected(peer_id: int) -> void:
 	_unregister_peer(peer_id)
+	# TODO: Need to handle disconnects during loading screen
 
 func _on_successful_connect() -> void:
 	_current_peer_info.peer_id = multiplayer.get_unique_id()
@@ -111,4 +146,7 @@ func _on_failed_connect() -> void:
 func _on_server_disconnected() -> void:
 	_remove_multiplayer_peer()
 	server_disconnected.emit()
+
+	push_error("Server disconnected")
+	# TODO: Return to main menu with message
 #endregion

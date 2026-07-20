@@ -10,6 +10,7 @@
 _mesh_instance = NodePath("../grandfather_clock")
 
 [node name="grandfather_clock" type="MeshInstance3D" parent="." index="1" unique_id=641886271]
+layers = 4
 mesh = ExtResource("2_qyqvt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2" unique_id=498802231]
