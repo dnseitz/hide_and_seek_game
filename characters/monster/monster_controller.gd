@@ -66,14 +66,16 @@ func _ready() -> void:
 		print(multiplayer.get_unique_id(), ": VISION PULSE ENDED")
 	)
 
-func _physics_process(delta: float) -> void:
+func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
+# func _physics_process(delta: float) -> void:
 	# Get speed before calculating updated velocity
 	var current_speed := velocity.length()
 
-	super._physics_process(delta)
+	super._rollback_tick(delta, tick, is_fresh)
+	# super._physics_process(delta)
 
 	# Push rigid bodies when sprinting
-	if _monster_input_controller.is_sprinting():
+	if _monster_input_controller.is_sprinting:
 	# if current_speed > _walk_speed:
 		var push_force := _max_push_force
 		# 	current_speed,

@@ -138,13 +138,6 @@ func _physics_process(_delta: float) -> void:
 				var emitter: MonsterEnvironmentVisionEmitter = parent
 				emitter.hit_by_pulse(_pulse_radius / VISION_PULSE_MAX_RADIUS)
 
-func _process(delta: float) -> void:
-	if is_multiplayer_authority() == false:
-		return
-
-	print(multiplayer.get_unique_id(), ": IS PULSING: ", _is_pulsing)
-	print(multiplayer.get_unique_id(), ": PULSE RADIUS: ", _pulse_radius)
-
 func _input(event: InputEvent) -> void:
 	if is_multiplayer_authority() == false:
 		return

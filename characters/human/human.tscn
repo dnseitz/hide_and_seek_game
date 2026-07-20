@@ -11,6 +11,9 @@ _input_controller = NodePath("HumanInputController")
 [node name="HumanInputController" parent="." index="0" unique_id=938950882 node_paths=PackedStringArray("_camera") instance=ExtResource("3_h3nk5")]
 _camera = NodePath("../CameraPivot/Camera3D")
 
+[node name="RollbackSynchronizer" parent="." index="1" unique_id=1167904510]
+input_properties = Array[String](["HumanInputController:movement_input_direction", "HumanInputController:is_sprinting"])
+
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" parent_id_path=PackedInt32Array(859340521) index="0" unique_id=578326789]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 cull_mask = 5

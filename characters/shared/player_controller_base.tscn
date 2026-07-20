@@ -1,5 +1,13 @@
 [gd_scene format=3 uid="uid://c4tbskn46gggw"]
 
+[ext_resource type="Script" uid="uid://d350u8evihs1u" path="res://addons/netfox/rollback/rollback-synchronizer.gd" id="1_44tvi"]
+[ext_resource type="Script" uid="uid://dour8fehaaugp" path="res://addons/netfox/tick-interpolator.gd" id="2_2k8j5"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2k8j5"]
+properties/0/path = NodePath(".:quaternion")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hnl6g"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hnl6g"]
@@ -8,6 +16,23 @@
 slide_on_ceiling = false
 platform_floor_layers = 4294967293
 platform_wall_layers = 2
+
+[node name="ClientMultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=410718611]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_2k8j5")
+visibility_update_mode = 1
+
+[node name="RollbackSynchronizer" type="Node" parent="." unique_id=1167904510 node_paths=PackedStringArray("root")]
+script = ExtResource("1_44tvi")
+root = NodePath("..")
+state_properties = Array[String]([":global_position", ":velocity"])
+metadata/_custom_type_script = "uid://d350u8evihs1u"
+
+[node name="TickInterpolator" type="Node" parent="." unique_id=726764350 node_paths=PackedStringArray("root")]
+script = ExtResource("2_2k8j5")
+root = NodePath("..")
+properties = Array[String]([":global_position"])
+metadata/_custom_type_script = "uid://dour8fehaaugp"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1967066756]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

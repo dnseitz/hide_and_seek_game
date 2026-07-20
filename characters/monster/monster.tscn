@@ -24,12 +24,16 @@ size = Vector2(2, 2)
 
 [node name="Monster" unique_id=1734781553 node_paths=PackedStringArray("_input_controller") instance=ExtResource("1_vhda2")]
 script = ExtResource("2_xm3rn")
+_max_push_force = 1.0
 _input_controller = NodePath("MonsterInputController")
 
 [node name="MonsterInputController" parent="." index="0" unique_id=70782917 node_paths=PackedStringArray("_monster_vision_post_processing_quad", "_camera") instance=ExtResource("2_7ouai")]
 unique_name_in_owner = true
 _monster_vision_post_processing_quad = NodePath("../CameraPivot/MonsterCamera3D/MonsterVisionPostProcessingQuad")
 _camera = NodePath("../CameraPivot/MonsterCamera3D")
+
+[node name="RollbackSynchronizer" parent="." index="2" unique_id=1167904510]
+input_properties = Array[String](["MonsterInputController:movement_input_direction", "MonsterInputController:is_sprinting"])
 
 [node name="MonsterCamera3D" type="Camera3D" parent="CameraPivot" parent_id_path=PackedInt32Array(859340521) index="0" unique_id=1626468861]
 unique_name_in_owner = true
