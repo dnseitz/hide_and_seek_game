@@ -1,5 +1,11 @@
 @tool class_name MonsterInputController extends PlayerInputControllerBase
 
+const ENVIRONMENT_NOISE_GROUP_NAME := &"environment_noise"
+const ENVIRONMENT_NOISES_MAX_COUNT := 64
+
+const SHADER_ENVIRONMENT_NOISES_DATA_PARAM := "environment_noises"
+const SHADER_ENVIRONMENT_NOISES_COUNT_PARAM := "environment_noises_count"
+
 const VISION_PULSE_IN_DURATION := 0.5
 const VISION_PULSE_OUT_DURATION := 3.5
 const VISION_PULSE_TOTAL_DURATION := VISION_PULSE_IN_DURATION + VISION_PULSE_OUT_DURATION
@@ -110,33 +116,8 @@ func _physics_process(_delta: float) -> void:
 	if is_multiplayer_authority() == false:
 		return
 
-	if _is_pulsing == false or _pulse_radius <= 0.0:
-		return
-
-	var space_state := get_world_3d().direct_space_state
-
-	var sphere_shape := SphereShape3D.new()
-	sphere_shape.radius = _pulse_radius
-
-	var query := PhysicsShapeQueryParameters3D.new()
-	query.shape = sphere_shape
-	query.collision_mask = 1 << 3 # monster vision environment object layer
-	query.collide_with_areas = true
-	query.collide_with_bodies = true
-	query.transform = Transform3D(Basis(), _pulse_start_point)
-	query.motion = Vector3.ZERO
-	query.exclude = _current_pulse_shapes_hit_rids
-
-	var result: Array[Dictionary] = space_state.intersect_shape(query)
-
-	if result.size() > 0:
-		for hit in result:
-			var collider: CollisionObject3D = hit["collider"]
-			_current_pulse_shapes_hit_rids.append(collider.get_rid())
-			var parent: Node = collider.get_parent()
-			if parent is MonsterEnvironmentVisionEmitter:
-				var emitter: MonsterEnvironmentVisionEmitter = parent
-				emitter.hit_by_pulse(_pulse_radius / VISION_PULSE_MAX_RADIUS)
+	_handle_environment_noises()
+	_handle_pulse()
 
 func _input(event: InputEvent) -> void:
 	if is_multiplayer_authority() == false:
@@ -183,6 +164,63 @@ func _input(event: InputEvent) -> void:
 
 func get_is_pulsing() -> bool:
 	return _is_pulsing
+
+func _handle_environment_noises() -> void:
+	var environment_noises: Array[MonsterEnvironmentNoise]
+	for node in get_tree().get_nodes_in_group(ENVIRONMENT_NOISE_GROUP_NAME):
+		if node is MonsterEnvironmentNoise == false:
+			push_warning("Non-noise node in environment noise group")
+			continue
+		
+		var noise: MonsterEnvironmentNoise = node
+		environment_noises.append(noise)
+
+	if environment_noises.size() > ENVIRONMENT_NOISES_MAX_COUNT:
+		environment_noises.sort_custom(func(noise_a: MonsterEnvironmentNoise, noise_b: MonsterEnvironmentNoise) -> bool:
+			return noise_a.global_position.distance_squared_to(global_position) < noise_b.global_position.distance_squared_to(global_position)
+		)
+		environment_noises = environment_noises.slice(0, ENVIRONMENT_NOISES_MAX_COUNT)
+	
+	var environment_noise_data: PackedVector4Array = []
+	for noise in environment_noises:
+		environment_noise_data.append(Vector4(
+			noise.global_position.x,
+			noise.global_position.y,
+			noise.global_position.z,
+			noise.get_noise_radius()
+		))
+	
+	_monster_vision_shader_material.set_shader_parameter(SHADER_ENVIRONMENT_NOISES_DATA_PARAM, environment_noise_data)
+	_monster_vision_shader_material.set_shader_parameter(SHADER_ENVIRONMENT_NOISES_COUNT_PARAM, environment_noise_data.size())
+
+func _handle_pulse() -> void:
+	if _is_pulsing == false or _pulse_radius <= 0.0:
+		return
+
+	var space_state := get_world_3d().direct_space_state
+
+	var sphere_shape := SphereShape3D.new()
+	sphere_shape.radius = _pulse_radius
+
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.shape = sphere_shape
+	query.collision_mask = 1 << 3 # monster vision environment object layer
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
+	query.transform = Transform3D(Basis(), _pulse_start_point)
+	query.motion = Vector3.ZERO
+	query.exclude = _current_pulse_shapes_hit_rids
+
+	var result: Array[Dictionary] = space_state.intersect_shape(query)
+
+	if result.size() > 0:
+		for hit in result:
+			var collider: CollisionObject3D = hit["collider"]
+			_current_pulse_shapes_hit_rids.append(collider.get_rid())
+			var parent: Node = collider.get_parent()
+			if parent is MonsterEnvironmentVisionEmitter:
+				var emitter: MonsterEnvironmentVisionEmitter = parent
+				emitter.hit_by_pulse(_pulse_radius / VISION_PULSE_MAX_RADIUS)
 
 func _reset_pulse_parameters() -> void:
 	_visibility_radius = 0.0

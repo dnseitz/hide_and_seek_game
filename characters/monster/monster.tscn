@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bnlptqyesj2l7"]
+[gd_scene format=4 uid="uid://bnlptqyesj2l7"]
 
 [ext_resource type="PackedScene" uid="uid://c4tbskn46gggw" path="res://characters/shared/player_controller_base.tscn" id="1_vhda2"]
 [ext_resource type="PackedScene" uid="uid://tmxujxcjh72o" path="res://characters/monster/input_controller/monster_input_controller.tscn" id="2_7ouai"]
@@ -16,6 +16,8 @@ shader_parameter/environment_visibility = 0.0
 shader_parameter/visible_radius = 0.0
 shader_parameter/visible_radius_start_feather = 0.0
 shader_parameter/visible_radius_end_feather = 0.0
+shader_parameter/environment_noises_count = 0
+shader_parameter/environment_noises = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [sub_resource type="QuadMesh" id="QuadMesh_7ouai"]
 material = SubResource("ShaderMaterial_pyrdw")

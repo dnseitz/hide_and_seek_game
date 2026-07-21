@@ -49,6 +49,7 @@ enabled=PackedStringArray("res://addons/netfox.extras/plugin.cfg", "res://addons
 [global_group]
 
 environment_object="Environment objects - These are rigid bodies that exist in the world, they appear as point clouds to the monster"
+environment_noise="Objects that cause \"environment noises\" that show up in monster vision"
 
 [input]
 

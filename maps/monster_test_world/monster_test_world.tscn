@@ -175,4 +175,3 @@ shadow_enabled = true
 
 [node name="Monster" parent="." unique_id=1734781553 instance=ExtResource("5_b18sd")]
 collision_mask = 7
-_max_push_force = 1.0

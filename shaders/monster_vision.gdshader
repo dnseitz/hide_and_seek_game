@@ -20,6 +20,10 @@ uniform sampler2D screen_texture : hint_screen_texture;
 uniform sampler2D depth_texture : hint_depth_texture;
 uniform sampler2D normal_roughness_texture : hint_normal_roughness_texture;
 
+uniform int environment_noises_count = 0;
+/// Position (x, y, z) + radius (w)
+uniform vec4 environment_noises[64];
+
 void vertex() {
 	// Position quad to cover entire screen
 	POSITION = vec4(VERTEX.xy, 1.0, 1.0);
@@ -42,7 +46,6 @@ float visibility_for_distance(float distance_from_start, float radius, float sta
 		radius, 
 		distance_from_start
 	);
-	//return visibility_start;
 	float visibility_end = 1.0 - smoothstep(
 		radius,
 		radius + end_feather,
@@ -52,6 +55,13 @@ float visibility_for_distance(float distance_from_start, float radius, float sta
 	//return visibility_end;
 	//
 	return visibility_start * visibility_end * environment_visibility;
+}
+
+float visibility_for_environment_noise(vec3 world_position, vec4 noise) {
+	float dist_to_noise = distance(world_position, noise.xyz);
+	
+	//return 0.0;
+	return 1.0 - smoothstep(0.0, noise.w, dist_to_noise);
 }
 
 void fragment() {
@@ -92,6 +102,15 @@ void fragment() {
 		
 		mix_ratio = clamp(mix_ratio, 0.0, 1.0);
 		//visibility_color = max(visibility_color, vec3(mix_ratio)); // Try this
+	}
+	
+	for (int i = 0; i < environment_noises_count; i++) {
+		vec3 noise_point_visibility_color = vec3(visibility_for_environment_noise(
+			world_position,
+			environment_noises[i]
+		));
+		
+		visibility_color = max(visibility_color, noise_point_visibility_color);
 	}
 	
 	// view_normal is now the normal vector in view/camera space!
