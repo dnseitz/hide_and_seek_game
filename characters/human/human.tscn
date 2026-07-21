@@ -3,16 +3,28 @@
 [ext_resource type="PackedScene" uid="uid://c4tbskn46gggw" path="res://characters/shared/player_controller_base.tscn" id="1_57amp"]
 [ext_resource type="Script" uid="uid://cbx1tw66y3lvt" path="res://characters/human/human_controller.gd" id="2_05gsu"]
 [ext_resource type="PackedScene" uid="uid://bysa76rcaibr" path="res://characters/human/input_controller/human_input_controller.tscn" id="3_h3nk5"]
+[ext_resource type="PackedScene" uid="uid://dregwjfxp1gen" path="res://environment/monster_vision_effects/monster_vision_loud_noise/loud_noise_emitter.tscn" id="4_8yfl4"]
+[ext_resource type="PackedScene" uid="uid://w43p7ms4c7lx" path="res://environment/monster_vision_effects/monster_vision_environment_object/monster_vision_environment_object.tscn" id="4_h3nk5"]
 
 [node name="Human" unique_id=1734781553 node_paths=PackedStringArray("_input_controller") instance=ExtResource("1_57amp")]
 script = ExtResource("2_05gsu")
 _input_controller = NodePath("HumanInputController")
 
-[node name="HumanInputController" parent="." index="0" unique_id=938950882 node_paths=PackedStringArray("_camera") instance=ExtResource("3_h3nk5")]
+[node name="MonsterVisionEnvironmentObject" parent="." index="0" unique_id=522734137 node_paths=PackedStringArray("_mesh_instance") instance=ExtResource("4_h3nk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+_mesh_instance = NodePath("../MeshInstance3D")
+
+[node name="LoudNoiseEmitter" parent="." index="1" unique_id=1606949737 instance=ExtResource("4_8yfl4")]
+unique_name_in_owner = true
+
+[node name="HumanInputController" parent="." index="2" unique_id=938950882 node_paths=PackedStringArray("_camera") instance=ExtResource("3_h3nk5")]
 _camera = NodePath("../CameraPivot/Camera3D")
 
-[node name="RollbackSynchronizer" parent="." index="2" unique_id=1167904510]
-input_properties = Array[String](["HumanInputController:movement_input_direction", "HumanInputController:is_sprinting"])
+[node name="RollbackSynchronizer" parent="." index="4" unique_id=1167904510]
+input_properties = Array[String](["HumanInputController:movement_input_direction", "HumanInputController:is_sprinting", "HumanInputController:is_sneaking"])
+
+[node name="MeshInstance3D" parent="." index="7" unique_id=1586919118]
+layers = 4
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" parent_id_path=PackedInt32Array(859340521) index="0" unique_id=578326789]
 physics_interpolation_mode = 2

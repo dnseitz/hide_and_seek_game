@@ -3,6 +3,9 @@ class_name LoudNoiseEmitter extends Node3D
 const LOUD_NOISE_EFFECT := preload("monster_vision_loud_noise.tscn")
 
 func emit_noise(loudness: float) -> void:
+	if multiplayer.is_server() == false:
+		return
+
 	var effect: Node3D = LOUD_NOISE_EFFECT.instantiate()
 
 	effect.scale = Vector3(loudness, loudness, loudness)

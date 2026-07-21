@@ -8,6 +8,7 @@
 			update_configuration_warnings()
 		
 		if is_node_ready() and _mesh_instance and _mesh_instance.mesh:
+			global_transform = _mesh_instance.global_transform
 			_update_emission_points(_mesh_instance.mesh)
 			_update_collision_bounding_box(_mesh_instance.mesh)
 
@@ -38,6 +39,7 @@ func _ready() -> void:
 	_particle_process_material = _particle_emitter.process_material
 
 	if _mesh_instance and _mesh_instance.mesh:
+		global_transform = _mesh_instance.global_transform
 		_update_emission_points(_mesh_instance.mesh)
 		_update_collision_bounding_box(_mesh_instance.mesh)
 	

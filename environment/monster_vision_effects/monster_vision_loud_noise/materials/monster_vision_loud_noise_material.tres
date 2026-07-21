@@ -11,6 +11,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 
 [resource]
+resource_local_to_scene = true
 render_priority = 1
 transparency = 3
 alpha_hash_scale = 2.0

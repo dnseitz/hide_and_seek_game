@@ -14,6 +14,7 @@ var authority_peer_id: int = MultiplayerManager.HOST_PEER_ID:
 		set_multiplayer_authority(authority_peer_id)
 
 		if is_node_ready():
+			# TODO: Fix this so we don't have to free the camera (or do we not care?)
 			if is_multiplayer_authority():
 				_camera.make_current()
 			else:
@@ -21,22 +22,13 @@ var authority_peer_id: int = MultiplayerManager.HOST_PEER_ID:
 
 func _ready() -> void:
 	NetworkTime.before_tick_loop.connect(_gather)
-	# print(multiplayer.get_unique_id(), " - ", get_parent().name, ": Checking camera against authority: ", authority_peer_id)
-	# if is_multiplayer_authority():
-	# 	_camera.make_current()
-	# if multiplayer.get_unique_id() == authority_peer_id:
-	# 	print(authority_peer_id, " - ", get_parent().name, ": Making camera current")
-	# 	_camera.make_current()
-	# else:
-	# 	_camera.current = false
 
 func _gather() -> void:
 	if is_multiplayer_authority() == false:
 		return
 	
-	movement_input_direction = _get_movement_input_direction()
-	is_sprinting = _get_is_sprinting()
-	return
+	movement_input_direction = Input.get_vector("move_right", "move_left", "move_back", "move_forward")
+	is_sprinting = Input.is_action_pressed("sprint_modifier")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_multiplayer_authority() == false:
@@ -57,10 +49,4 @@ func consume_cam_input_direction() -> Vector2:
 	var input_direction := camera_input_direction
 	camera_input_direction = Vector2.ZERO
 	return input_direction
-
-func _get_movement_input_direction() -> Vector2:
-	return Input.get_vector("move_right", "move_left", "move_back", "move_forward")
-
-func _get_is_sprinting() -> bool:
-	return Input.is_action_pressed("sprint_modifier")
 #endregion

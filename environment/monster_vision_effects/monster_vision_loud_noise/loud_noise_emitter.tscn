@@ -4,3 +4,7 @@
 
 [node name="LoudNoiseEmitter" type="Node3D" unique_id=1606949737]
 script = ExtResource("1_usfvu")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1786083149]
+_spawnable_scenes = PackedStringArray("uid://d15k3ri2s6pqa")
+spawn_path = NodePath("..")
