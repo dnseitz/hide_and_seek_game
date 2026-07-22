@@ -98,6 +98,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_cqv5y"]
 resource_name = "make_noise"
+length = 3.0000000000000004
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -143,10 +144,24 @@ tracks/3/path = NodePath(".:_noise_radius")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.19999999, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [1.0]
+"values": [0.0, 1.0, 0.0]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rky5s"]
@@ -172,6 +187,7 @@ draw_pass_1 = SubResource("QuadMesh_ddld7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1703173380]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+layers = 2
 mesh = SubResource("QuadMesh_hnl6g")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=415653863]

@@ -89,7 +89,7 @@ var _environment_visibility: float = 0.0:
 
 var _current_pulse_shapes_hit_rids: Array[RID] = []
 
-var _is_pulsing: bool = false
+var is_pulsing: bool = false
 
 func _get_configuration_warnings() -> PackedStringArray:
 	if _monster_vision_post_processing_quad == null \
@@ -119,6 +119,9 @@ func _physics_process(_delta: float) -> void:
 	_handle_environment_noises()
 	_handle_pulse()
 
+func _gather() -> void:
+	super._gather()
+
 func _input(event: InputEvent) -> void:
 	if is_multiplayer_authority() == false:
 		return
@@ -129,8 +132,8 @@ func _input(event: InputEvent) -> void:
 	var mouse_button_event: InputEventMouseButton = event
 
 	# TODO: Make pulse button re-bindable in settings
-	if _is_pulsing == false and mouse_button_event.button_index == MOUSE_BUTTON_RIGHT and mouse_button_event.is_released():
-		_is_pulsing = true
+	if is_pulsing == false and mouse_button_event.button_index == MOUSE_BUTTON_RIGHT and mouse_button_event.is_released():
+		is_pulsing = true
 		vision_pulse_started.emit()
 		_pulse_start_point = global_position
 
@@ -163,7 +166,7 @@ func _input(event: InputEvent) -> void:
 		)
 
 func get_is_pulsing() -> bool:
-	return _is_pulsing
+	return is_pulsing
 
 func _handle_environment_noises() -> void:
 	var environment_noises: Array[MonsterEnvironmentNoise]
@@ -194,7 +197,7 @@ func _handle_environment_noises() -> void:
 	_monster_vision_shader_material.set_shader_parameter(SHADER_ENVIRONMENT_NOISES_COUNT_PARAM, environment_noise_data.size())
 
 func _handle_pulse() -> void:
-	if _is_pulsing == false or _pulse_radius <= 0.0:
+	if is_pulsing == false or _pulse_radius <= 0.0:
 		return
 
 	var space_state := get_world_3d().direct_space_state
@@ -231,4 +234,4 @@ func _reset_pulse_parameters() -> void:
 	_visibility_start_fade = 0.0
 	_visibility_end_fade = 0.0
 	_current_pulse_shapes_hit_rids = []
-	_is_pulsing = false
+	is_pulsing = false

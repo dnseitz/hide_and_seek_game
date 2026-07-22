@@ -10,6 +10,6 @@ func emit_noise(loudness: float) -> void:
 
 	effect.scale = Vector3(loudness, loudness, loudness)
 	effect.top_level = true
-	get_tree().root.add_child(effect)
+	add_child(effect, true)
 	effect.global_position = global_position
 	effect.reset_physics_interpolation()
