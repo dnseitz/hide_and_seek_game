@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://8ywjg0fomji5"]
+
+[ext_resource type="Script" uid="uid://c8p68tifaeo23" path="res://environment/interactables/button/button.gd" id="1_y5mc7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hnl6g"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hnl6g"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[node name="Button" type="Node3D" unique_id=1899623239]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+script = ExtResource("1_y5mc7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=457677227]
+layers = 4
+mesh = SubResource("BoxMesh_hnl6g")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1527680894]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=393038008]
+shape = SubResource("BoxShape3D_hnl6g")

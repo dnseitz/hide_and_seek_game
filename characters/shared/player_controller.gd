@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 	# as it needs to reconcile with the server's view of the camera rotation.
 	_handle_camera_input(delta)
 
-func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
+func _rollback_tick(delta: float, _tick: int, _is_fresh: bool) -> void:
 	_handle_movement_input(delta)
 
 func _input(event: InputEvent) -> void:

@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://dregwjfxp1gen" path="res://environment/monster_vision_effects/monster_vision_loud_noise/loud_noise_emitter.tscn" id="5_y7lvo"]
 [ext_resource type="Material" uid="uid://yk5hyx6im6od" path="res://materials/monster_environment_material/monster_environment_mat.tres" id="6_ii8hx"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_hnl6g"]
+size = Vector3(0.2, 0.2, 0.2)
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8k1si"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -19,13 +22,24 @@ background_mode = 2
 sky = SubResource("Sky_l6m7r")
 glow_enabled = true
 
-[node name="GameWorldBase" unique_id=447505545 instance=ExtResource("1_750nw")]
+[node name="GameWorldBase" unique_id=447505545 node_paths=PackedStringArray("_monster_spawn_positions", "_human_spawn_positions") instance=ExtResource("1_750nw")]
 script = ExtResource("2_750nw")
+_monster_spawn_positions = [NodePath("GameEnvironment/SpawnPositions/MonsterSpawnPosition")]
+_human_spawn_positions = [NodePath("GameEnvironment/SpawnPositions/HumanSpawnPosition1"), NodePath("GameEnvironment/SpawnPositions/HumanSpawnPosition2"), NodePath("GameEnvironment/SpawnPositions/HumanSpawnPosition3"), NodePath("GameEnvironment/SpawnPositions/HumanSpawnPosition4")]
 
 [node name="GameEnvironment" type="Node3D" parent="." index="2" unique_id=440964768]
 script = ExtResource("2_750nw")
 
-[node name="Props" type="Node3D" parent="GameEnvironment" index="0" unique_id=767989533]
+[node name="Buttons" type="Node3D" parent="GameEnvironment" index="0" unique_id=839975406]
+
+[node name="Button" type="Node3D" parent="GameEnvironment/Buttons" index="0" unique_id=491227263]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.83982897, 1.672899, -40.10917)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameEnvironment/Buttons/Button" index="0" unique_id=1824132530]
+layers = 4
+mesh = SubResource("BoxMesh_hnl6g")
+
+[node name="Props" type="Node3D" parent="GameEnvironment" index="1" unique_id=767989533]
 
 [node name="OldTable" parent="GameEnvironment/Props" index="0" unique_id=2146407058 instance=ExtResource("3_4b63e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.484972, 2.3841858e-07, -3.140039)
@@ -60,7 +74,7 @@ unique_name_in_owner = true
 wait_time = 5.0
 autostart = true
 
-[node name="World" type="CSGCombiner3D" parent="GameEnvironment" index="1" unique_id=1369712989]
+[node name="World" type="CSGCombiner3D" parent="GameEnvironment" index="2" unique_id=1369712989]
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="GameEnvironment/World" index="0" unique_id=1994485938]
@@ -163,9 +177,30 @@ transform = Transform3D(-1, 0, 2.6226834e-07, -1.8545173e-07, 0.70710677, -0.707
 size = Vector3(4.2001, 18.068428, 3.5551758)
 material = ExtResource("6_ii8hx")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="GameEnvironment" index="2" unique_id=1700347322]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="GameEnvironment" index="3" unique_id=1700347322]
 environment = SubResource("Environment_3sjjp")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="GameEnvironment" index="3" unique_id=163553051]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="GameEnvironment" index="4" unique_id=163553051]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
+
+[node name="SpawnPositions" type="Node3D" parent="GameEnvironment" index="5" unique_id=1850131194]
+
+[node name="MonsterSpawnPosition" type="Marker3D" parent="GameEnvironment/SpawnPositions" index="0" unique_id=793018408]
+gizmo_extents = 1.0
+
+[node name="HumanSpawnPosition1" type="Marker3D" parent="GameEnvironment/SpawnPositions" index="1" unique_id=890508406]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1408734, 0, 30.607227)
+gizmo_extents = 1.0
+
+[node name="HumanSpawnPosition2" type="Marker3D" parent="GameEnvironment/SpawnPositions" index="2" unique_id=148349423]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8591266, 0, 30.607227)
+gizmo_extents = 1.0
+
+[node name="HumanSpawnPosition3" type="Marker3D" parent="GameEnvironment/SpawnPositions" index="3" unique_id=1618376035]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8591266, 0, 30.607227)
+gizmo_extents = 1.0
+
+[node name="HumanSpawnPosition4" type="Marker3D" parent="GameEnvironment/SpawnPositions" index="4" unique_id=1855337630]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.859127, 0, 30.607227)
+gizmo_extents = 1.0
