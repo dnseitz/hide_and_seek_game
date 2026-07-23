@@ -86,9 +86,6 @@ points = PackedVector3Array(-0.65911424, 0.8167286, -0.61812854, 0.20051584, 0.8
 
 [node name="OldTable" unique_id=2146407058 instance=ExtResource("1_rtqgs")]
 
-[node name="MonsterVisionEnvironmentObject" parent="." index="0" unique_id=522734137 node_paths=PackedStringArray("_mesh_instance")]
-_mesh_instance = NodePath("../table")
-
 [node name="table" type="MeshInstance3D" parent="." index="1" unique_id=1185519981]
 layers = 4
 mesh = SubResource("ArrayMesh_02sta")
@@ -122,3 +119,6 @@ shape = SubResource("ConvexPolygonShape3D_0j0it")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="11" unique_id=1619077925]
 shape = SubResource("ConvexPolygonShape3D_3bhc6")
+
+[node name="MonsterVisionEnvironmentObject" parent="." index="12" unique_id=522734137 node_paths=PackedStringArray("_mesh_instance")]
+_mesh_instance = NodePath("../table")

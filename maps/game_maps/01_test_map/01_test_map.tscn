@@ -4,8 +4,6 @@
 [ext_resource type="Script" uid="uid://dxkm8x4rtent3" path="res://maps/game_maps/01_test_map/01_test_map.gd" id="2_750nw"]
 [ext_resource type="PackedScene" uid="uid://t2egns84aqwv" path="res://environment/props/old_table/old_table.tscn" id="3_4b63e"]
 [ext_resource type="PackedScene" uid="uid://8ywjg0fomji5" path="res://environment/interactables/button/button.tscn" id="3_qivnu"]
-[ext_resource type="PackedScene" uid="uid://cohyw8rksor46" path="res://environment/props/grandfather_clock/grandfather_clock.tscn" id="4_pmhmf"]
-[ext_resource type="PackedScene" uid="uid://dregwjfxp1gen" path="res://environment/monster_vision_effects/monster_vision_loud_noise/loud_noise_emitter.tscn" id="5_y7lvo"]
 [ext_resource type="Material" uid="uid://yk5hyx6im6od" path="res://materials/monster_environment_material/monster_environment_mat.tres" id="6_ii8hx"]
 [ext_resource type="PackedScene" uid="uid://danuwif150gp3" path="res://components/triggerable_component/hide_triggerable_component/hide_visibility_triggerable.tscn" id="7_4b63e"]
 [ext_resource type="PackedScene" uid="uid://b6tqoogftlqsu" path="res://environment/interactables/area_trigger/area_trigger.tscn" id="7_pmhmf"]
@@ -65,23 +63,125 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.243683, 0, -3.3232536)
 [node name="OldTable5" parent="GameEnvironment/Props" index="4" unique_id=487327394 instance=ExtResource("3_4b63e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.206116, 0, -9.35363)
 
-[node name="GrandfatherClock" parent="GameEnvironment/Props" index="5" unique_id=640902128 instance=ExtResource("4_pmhmf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.983293, 0, -16.925331)
+[node name="OldTable6" parent="GameEnvironment/Props" index="5" unique_id=864107626 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.687252, 2.3841858e-07, -3.140039)
 
-[node name="GrandfatherClock2" parent="GameEnvironment/Props" index="6" unique_id=598787239 instance=ExtResource("4_pmhmf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.429323, 0, -26.467566)
+[node name="OldTable7" parent="GameEnvironment/Props" index="6" unique_id=1641826244 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.13636, 2.3841858e-07, -12.314231)
 
-[node name="GrandfatherClock3" parent="GameEnvironment/Props" index="7" unique_id=1336920944 instance=ExtResource("4_pmhmf")]
-transform = Transform3D(-0.9981403, 0, 0.060959104, 0.020770395, 0.94016236, 0.34009305, -0.057311457, 0.3407267, -0.9384139, 10.662309, 4.7683716e-07, -19.348335)
+[node name="OldTable8" parent="GameEnvironment/Props" index="7" unique_id=202304550 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.795727, 0, -5.9879527)
 
-[node name="LoudNoiseEmitter" parent="GameEnvironment/Props" index="8" unique_id=1606949737 instance=ExtResource("5_y7lvo")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.933425)
+[node name="OldTable9" parent="GameEnvironment/Props" index="8" unique_id=1002593196 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.92854, 0, -3.3232536)
 
-[node name="LoudNoiseTimer" type="Timer" parent="GameEnvironment/Props/LoudNoiseEmitter" index="0" unique_id=1900480178]
-unique_name_in_owner = true
-wait_time = 5.0
-autostart = true
+[node name="OldTable10" parent="GameEnvironment/Props" index="9" unique_id=1208865072 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.966106, 0, -9.35363)
+
+[node name="OldTable11" parent="GameEnvironment/Props" index="10" unique_id=362575013 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.65044, 2.3841858e-07, 10.122932)
+
+[node name="OldTable12" parent="GameEnvironment/Props" index="11" unique_id=1219670342 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.09955, 2.3841858e-07, 0.94874096)
+
+[node name="OldTable13" parent="GameEnvironment/Props" index="12" unique_id=973006491 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.758915, 0, 7.275019)
+
+[node name="OldTable14" parent="GameEnvironment/Props" index="13" unique_id=1203578769 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.891727, 0, 9.939718)
+
+[node name="OldTable15" parent="GameEnvironment/Props" index="14" unique_id=2141422003 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.929295, 0, 3.9093418)
+
+[node name="OldTable16" parent="GameEnvironment/Props" index="15" unique_id=225405040 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.947102, 2.3841858e-07, 11.233837)
+
+[node name="OldTable17" parent="GameEnvironment/Props" index="16" unique_id=789312230 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.39621, 2.3841858e-07, 2.0596457)
+
+[node name="OldTable18" parent="GameEnvironment/Props" index="17" unique_id=1778734008 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.055576, 0, 8.385923)
+
+[node name="OldTable19" parent="GameEnvironment/Props" index="18" unique_id=2137976429 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.188389, 0, 11.050623)
+
+[node name="OldTable20" parent="GameEnvironment/Props" index="19" unique_id=858867551 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.225956, 0, 5.0202465)
+
+[node name="OldTable21" parent="GameEnvironment/Props" index="20" unique_id=705863323 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.242554, 2.3841858e-07, -3.8710318)
+
+[node name="OldTable22" parent="GameEnvironment/Props" index="21" unique_id=260192227 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.691658, 2.3841858e-07, -13.045223)
+
+[node name="OldTable23" parent="GameEnvironment/Props" index="22" unique_id=1349715853 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.35103, 0, -6.7189455)
+
+[node name="OldTable24" parent="GameEnvironment/Props" index="23" unique_id=883100978 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.48384, 0, -4.054246)
+
+[node name="OldTable25" parent="GameEnvironment/Props" index="24" unique_id=614939316 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.521408, 0, -10.084622)
+
+[node name="OldTable26" parent="GameEnvironment/Props" index="25" unique_id=1182590620 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.687252, 2.3841858e-07, 9.030236)
+
+[node name="OldTable27" parent="GameEnvironment/Props" index="26" unique_id=128254640 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.13636, 2.3841858e-07, -0.14395618)
+
+[node name="OldTable28" parent="GameEnvironment/Props" index="27" unique_id=1544071909 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.795727, 0, 6.182322)
+
+[node name="OldTable29" parent="GameEnvironment/Props" index="28" unique_id=1663570737 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.92854, 0, 8.847021)
+
+[node name="OldTable30" parent="GameEnvironment/Props" index="29" unique_id=551279849 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.966106, 0, 2.8166447)
+
+[node name="OldTable31" parent="GameEnvironment/Props" index="30" unique_id=87284355 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.65044, 2.3841858e-07, 22.293205)
+
+[node name="OldTable32" parent="GameEnvironment/Props" index="31" unique_id=855519826 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.09955, 2.3841858e-07, 13.119016)
+
+[node name="OldTable33" parent="GameEnvironment/Props" index="32" unique_id=1031561209 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.758915, 0, 19.445293)
+
+[node name="OldTable34" parent="GameEnvironment/Props" index="33" unique_id=1669917847 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.891727, 0, 22.109993)
+
+[node name="OldTable35" parent="GameEnvironment/Props" index="34" unique_id=1974748772 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.929295, 0, 16.079617)
+
+[node name="OldTable36" parent="GameEnvironment/Props" index="35" unique_id=408992318 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.947102, 2.3841858e-07, 23.40411)
+
+[node name="OldTable37" parent="GameEnvironment/Props" index="36" unique_id=600932774 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.39621, 2.3841858e-07, 14.22992)
+
+[node name="OldTable38" parent="GameEnvironment/Props" index="37" unique_id=1924756186 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.055576, 0, 20.556198)
+
+[node name="OldTable39" parent="GameEnvironment/Props" index="38" unique_id=1358468596 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.188389, 0, 23.220898)
+
+[node name="OldTable40" parent="GameEnvironment/Props" index="39" unique_id=736489566 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.225956, 0, 17.190521)
+
+[node name="OldTable41" parent="GameEnvironment/Props" index="40" unique_id=344115465 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.242554, 2.3841858e-07, 8.299243)
+
+[node name="OldTable42" parent="GameEnvironment/Props" index="41" unique_id=1914744856 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.691658, 2.3841858e-07, -0.8749485)
+
+[node name="OldTable43" parent="GameEnvironment/Props" index="42" unique_id=2080319965 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.35103, 0, 5.451329)
+
+[node name="OldTable44" parent="GameEnvironment/Props" index="43" unique_id=508889785 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.48384, 0, 8.116029)
+
+[node name="OldTable45" parent="GameEnvironment/Props" index="44" unique_id=372154665 instance=ExtResource("3_4b63e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.521408, 0, 2.0856524)
 
 [node name="World" type="CSGCombiner3D" parent="GameEnvironment" index="2" unique_id=1369712989]
 use_collision = true
