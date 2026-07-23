@@ -7,6 +7,7 @@ const RUN_STEP_NOISE_COOLDOWN_TIME := 0.5
 
 const MICROSECONDS_IN_SECOND := 1_000_000.0
 
+@export_group("Movement")
 @export var _sneak_speed: float = 2.5
 
 @onready var _loud_noise_emitter: LoudNoiseEmitter = %LoudNoiseEmitter
@@ -18,7 +19,10 @@ var _human_input_controller: HumanInputController:
 var _step_cooldown_time: float = WALK_STEP_NOISE_COOLDOWN_TIME
 var _last_loud_noise_emitted_time_usec: int = 0
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+	if multiplayer.is_server() == false:
+		return
+
 	var current_speed := velocity.length()
 	if current_speed < _walk_speed:
 		return
@@ -29,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	var seconds_since_last_emission: float = (current_time_usec - _last_loud_noise_emitted_time_usec) / MICROSECONDS_IN_SECOND
 
 	if seconds_since_last_emission >= _step_cooldown_time:
-		_last_loud_noise_emitted_time_usec  =current_time_usec
+		_last_loud_noise_emitted_time_usec = current_time_usec
 		var loudness := clampf(remap(
 			current_speed,
 			LOUD_STEP_SPEED_THRESHOLD, _sprint_speed,

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://danuwif150gp3"]
+
+[ext_resource type="Script" uid="uid://c42jlv188701q" path="res://components/triggerable_component/hide_triggerable_component/hide_visibility_triggerable.gd" id="1_2qldx"]
+
+[node name="HideVisibilityTriggerable" type="Node" unique_id=580281875]
+script = ExtResource("1_2qldx")

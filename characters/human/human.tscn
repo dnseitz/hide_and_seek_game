@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bysa76rcaibr" path="res://characters/human/input_controller/human_input_controller.tscn" id="3_h3nk5"]
 [ext_resource type="PackedScene" uid="uid://dregwjfxp1gen" path="res://environment/monster_vision_effects/monster_vision_loud_noise/loud_noise_emitter.tscn" id="4_8yfl4"]
 [ext_resource type="PackedScene" uid="uid://w43p7ms4c7lx" path="res://environment/monster_vision_effects/monster_vision_environment_object/monster_vision_environment_object.tscn" id="4_h3nk5"]
+[ext_resource type="PackedScene" uid="uid://sdag6tqut761" path="res://components/interaction_component/interaction_component.tscn" id="6_wptww"]
+[ext_resource type="PackedScene" uid="uid://cw8qa7iyjre5i" path="res://characters/human/ui/human_ui.tscn" id="7_u8v5m"]
 
 [node name="Human" unique_id=1734781553 node_paths=PackedStringArray("_input_controller") instance=ExtResource("1_57amp")]
 script = ExtResource("2_05gsu")
@@ -17,7 +19,9 @@ _mesh_instance = NodePath("../MeshInstance3D")
 [node name="LoudNoiseEmitter" parent="." index="1" unique_id=1606949737 instance=ExtResource("4_8yfl4")]
 unique_name_in_owner = true
 
-[node name="HumanInputController" parent="." index="2" unique_id=938950882 node_paths=PackedStringArray("_camera") instance=ExtResource("3_h3nk5")]
+[node name="HumanInputController" parent="." index="2" unique_id=938950882 node_paths=PackedStringArray("_interaction_component", "_ui", "_camera") instance=ExtResource("3_h3nk5")]
+_interaction_component = NodePath("../CameraPivot/InteractionComponent")
+_ui = NodePath("../HumanUICanvasLayer")
 _camera = NodePath("../CameraPivot/Camera3D")
 
 [node name="RollbackSynchronizer" parent="." index="4" unique_id=1167904510]
@@ -26,7 +30,14 @@ input_properties = Array[String](["HumanInputController:movement_input_direction
 [node name="MeshInstance3D" parent="." index="7" unique_id=1586919118]
 layers = 4
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot" parent_id_path=PackedInt32Array(859340521) index="0" unique_id=578326789]
+[node name="InteractionComponent" parent="CameraPivot" parent_id_path=PackedInt32Array(859340521) index="0" unique_id=804214899 instance=ExtResource("6_wptww")]
+unique_name_in_owner = true
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" parent_id_path=PackedInt32Array(859340521) index="1" unique_id=578326789]
 physics_interpolation_mode = 2
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 cull_mask = 5
+
+[node name="HumanUICanvasLayer" parent="." index="9" unique_id=1504827369 instance=ExtResource("7_u8v5m")]
+unique_name_in_owner = true
+visible = false

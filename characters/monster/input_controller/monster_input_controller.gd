@@ -123,6 +123,8 @@ func _gather() -> void:
 	super._gather()
 
 func _input(event: InputEvent) -> void:
+	super._input(event)
+
 	if is_multiplayer_authority() == false:
 		return
 
