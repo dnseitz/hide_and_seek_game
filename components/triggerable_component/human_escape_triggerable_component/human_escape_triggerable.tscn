@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bmnnf4ce3o7ka"]
+
+[ext_resource type="Script" uid="uid://bk71l8kv6c0md" path="res://components/triggerable_component/human_escape_triggerable_component/human_escape_triggerable.gd" id="1_lykvi"]
+
+[node name="HumanEscapeTriggerable" type="Node" unique_id=1711806945]
+script = ExtResource("1_lykvi")

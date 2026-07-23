@@ -12,7 +12,8 @@ properties/0/replication_mode = 1
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hnl6g"]
 
-[node name="PlayerController" type="CharacterBody3D" unique_id=1734781553]
+[node name="PlayerController" type="CharacterBody3D" unique_id=1734781553 groups=["player"]]
+collision_layer = 32
 slide_on_ceiling = false
 platform_floor_layers = 4294967293
 platform_wall_layers = 2

@@ -1,4 +1,4 @@
-extends PlayerController
+class_name HumanController extends PlayerController
 
 const LOUD_STEP_SPEED_THRESHOLD := 3.0
 
@@ -51,3 +51,13 @@ func _get_target_movement_speed() -> float:
 		return _sneak_speed
 	
 	return super._get_target_movement_speed()
+
+func is_monster() -> bool:
+	return false
+
+@rpc("call_local")
+func show_escape_screen() -> void:
+	# TODO: Show spectator mode if there are more players
+	var escape_scene: PackedScene = load("res://menu/end_game/end_game.tscn")
+
+	get_tree().root.add_child(escape_scene.instantiate())

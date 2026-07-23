@@ -1,5 +1,7 @@
 @abstract class_name PlayerController extends CharacterBody3D
 
+const PLAYER_GROUP_NAME := &"player"
+
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
@@ -46,6 +48,12 @@ func _input(event: InputEvent) -> void:
 func set_player_input_authority(peer_id: int) -> void:
 	_input_controller.authority_peer_id = peer_id
 	_client_synchronizer.set_multiplayer_authority(peer_id)
+
+func get_player_input_authority() -> int:
+	return _input_controller.authority_peer_id
+
+## If this player character is the monster.
+@abstract func is_monster() -> bool
 
 func _handle_camera_input(delta: float) -> void:
 	var cam_input_direction := _input_controller.consume_cam_input_direction()

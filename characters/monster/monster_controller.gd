@@ -1,4 +1,4 @@
-extends PlayerController
+class_name MonsterController extends PlayerController
 
 ## Proposed Monster mechanics:
 ##   Audio:
@@ -95,6 +95,9 @@ func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
 				impulse.y = abs(impulse.y * 1.5)
 
 				rigid_body.apply_impulse(impulse, local_collision_position)
+
+func is_monster() -> bool:
+	return true
 
 func _get_target_movement_speed() -> float:
 	if _monster_input_controller.get_is_pulsing():

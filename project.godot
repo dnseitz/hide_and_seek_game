@@ -27,6 +27,7 @@ WindowTiler="*uid://cmqjajhjgffm1"
 NetworkSimulator="*uid://1y2ey1e6qjwr"
 MultiplayerManager="*uid://wcko3qeo2b1l"
 SceneSwitcher="*uid://bljofxft7x6kd"
+GameState="*uid://l30fimoiryti"
 
 [debug]
 
@@ -50,6 +51,7 @@ enabled=PackedStringArray("res://addons/netfox.extras/plugin.cfg", "res://addons
 
 environment_object="Environment objects - These are rigid bodies that exist in the world, they appear as point clouds to the monster"
 environment_noise="Objects that cause \"environment noises\" that show up in monster vision"
+player="A player character, either a human or a monster"
 
 [input]
 
@@ -109,6 +111,7 @@ interact={
 3d_physics/layer_3="environment_object"
 3d_physics/layer_4="monster_vision_environment_object"
 3d_physics/layer_5="interactable"
+3d_physics/layer_6="player_character"
 
 [physics]
 

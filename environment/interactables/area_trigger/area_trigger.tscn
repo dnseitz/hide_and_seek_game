@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b6tqoogftlqsu"]
+
+[ext_resource type="Script" uid="uid://d4c7nr3bfaocr" path="res://environment/interactables/area_trigger/area_trigger.gd" id="1_nnxfq"]
+
+[node name="AreaTrigger" type="Area3D" unique_id=1841120034]
+collision_layer = 0
+collision_mask = 32
+monitorable = false
+script = ExtResource("1_nnxfq")
