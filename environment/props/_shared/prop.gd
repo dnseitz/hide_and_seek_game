@@ -9,8 +9,9 @@ var _monster_vision_emitter: MonsterEnvironmentVisionEmitter
 
 func _ready() -> void:
 	if multiplayer.is_server() == false:
-		# _multiplayer_synchronizer.process_mode = Node.PROCESS_MODE_DISABLED
-		collision_layer = 0 # Clear collision layer, all collisions are handled on the server
+		if GameState.is_current_player_monster():
+			# Clear collision layer if current player is monster, all collisions are handled on the server
+			collision_layer = 0 
 		freeze = true
 
 	_meshes = []

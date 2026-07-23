@@ -27,8 +27,6 @@ size = Vector2(2, 2)
 [node name="Monster" unique_id=1734781553 node_paths=PackedStringArray("_input_controller") instance=ExtResource("1_vhda2")]
 script = ExtResource("2_xm3rn")
 _max_push_force = 1.0
-_debug_environment_prop_meshes_visible = true
-_debug_monster_vision_disabled = true
 _input_controller = NodePath("MonsterInputController")
 
 [node name="MonsterInputController" parent="." index="0" unique_id=70782917 node_paths=PackedStringArray("_monster_vision_post_processing_quad", "_camera") instance=ExtResource("2_7ouai")]

@@ -1,4 +1,4 @@
-@tool class_name MonsterInputController extends PlayerInputControllerBase
+class_name MonsterInputController extends PlayerInputControllerBase
 
 const ENVIRONMENT_NOISE_GROUP_NAME := &"environment_noise"
 const ENVIRONMENT_NOISES_MAX_COUNT := 64

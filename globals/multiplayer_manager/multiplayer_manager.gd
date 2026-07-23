@@ -66,6 +66,9 @@ func join(addr: String) -> int:
 	
 	return OK
 
+func get_current_peer_info() -> PeerInfo:
+	return _current_peer_info
+
 func get_peers() -> Array[PeerInfo]:
 	var peers := _connected_peers.values().duplicate()
 	peers.sort_custom(func(a: PeerInfo, b: PeerInfo) -> bool:
