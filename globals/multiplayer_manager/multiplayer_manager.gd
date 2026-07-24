@@ -10,7 +10,7 @@ const NORAY_SERVER_COMMAND_PORT := 8890
 const UNCONNECTED_PEER_ID := -1
 const HOST_PEER_ID := 1
 
-const DEFAULT_PORT := 8970
+# const DEFAULT_PORT := 8970
 const PLAYER_COUNT := 5
 
 signal server_started
@@ -41,6 +41,7 @@ func _ready() -> void:
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 	Noray.on_connect_nat.connect(_handle_punchthrough_connect)
+	Noray.on_connect_relay.connect(_handle_punchthrough_connect)
 
 func get_current_lobby_code() -> String:
 	return _current_lobby_code
@@ -65,6 +66,8 @@ func host() -> Error:
 
 	_current_lobby_code = Noray.oid
 
+	print("STARTED SERVER ON PORT: ", Noray.local_port)
+
 	multiplayer.multiplayer_peer = peer
 
 	_current_peer_info.peer_id = HOST_PEER_ID
@@ -86,8 +89,15 @@ func join(lobby_code: String) -> Error:
 	var winner: Signal = await await_either(multiplayer.connected_to_server, multiplayer.connection_failed)
 
 	if winner == multiplayer.connection_failed:
-		push_error("Failed to connect to remote server")
-		return ERR_UNAVAILABLE
+		push_warning("Failed to connect to remote server with NAT punchthrough, falling back to relay")
+
+		Noray.connect_relay(lobby_code)
+
+		winner = await await_either(multiplayer.connected_to_server, multiplayer.connection_failed)
+
+		if winner == multiplayer.connection_failed:
+			push_warning("Failed to connect to remote server with relay")
+			return ERR_UNAVAILABLE
 	
 	_current_lobby_code = lobby_code
 
@@ -228,6 +238,7 @@ func _handle_punchthrough_connect(address: String, port: int) -> Error:
 		var error := await PacketHandshake.over_packet_peer(udp)
 		udp.close()
 
+		print("UDP HANDSHAKE ERROR: ", error, " - ", error_string(error))
 		if error != OK and error != ERR_BUSY:
 			push_error("Failed UDP packet handshake: ", error_string(error))
 			return error

@@ -13,6 +13,7 @@ class HandshakeStatus:
 			("x" if did_handshake else "-")
 	
 	static func from_string(str: String) -> HandshakeStatus:
+		print("HANDSHAKE PACKET: ", str)
 		var result = HandshakeStatus.new()
 		result.did_read = str.contains("r")
 		result.did_write = str.contains("w")
@@ -25,9 +26,13 @@ func over_packet_peer(peer: PacketPeer, timeout: float = 8.0, frequency: float =
 	var status = HandshakeStatus.new()
 	status.did_write = true
 
-	while timeout >= 0:
+	print("STARTING CLIENT HANDSHAKE PROCESS")
+	var reads: int = 0
+
+	while timeout >= 0 or reads < 3:
 		# Process incoming packets
 		while peer.get_available_packet_count() > 0:
+			print("PACKETS AVAILABLE TO READ")
 			var packet = peer.get_packet()
 			var incoming_status = HandshakeStatus.from_string(packet.get_string_from_ascii())
 			
@@ -41,7 +46,8 @@ func over_packet_peer(peer: PacketPeer, timeout: float = 8.0, frequency: float =
 			# Both peers ack'd the handshake, we've succeeded
 			if incoming_status.did_handshake and status.did_handshake:
 				result = OK
-				timeout = 0 # Break outer loop
+				reads += 1
+				# timeout = 0 # Break outer loop
 		
 		# Send our state
 		peer.put_packet(status.to_string().to_ascii_buffer())
