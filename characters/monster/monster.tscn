@@ -47,5 +47,6 @@ current = true
 [node name="MonsterVisionPostProcessingQuad" type="MeshInstance3D" parent="CameraPivot/MonsterCamera3D" index="0" unique_id=722458253]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0562007e-08, 0, -0.23520195)
+visible = false
 layers = 2
 mesh = SubResource("QuadMesh_7ouai")
