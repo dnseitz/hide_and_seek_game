@@ -29,6 +29,19 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Host"
 
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=257628427]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1664760624]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LobbyCodeLineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1268700424]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+placeholder_text = "Lobby Code"
+
 [node name="JoinButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1023929917]
 unique_name_in_owner = true
 layout_mode = 2

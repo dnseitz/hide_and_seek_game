@@ -28,6 +28,8 @@ NetworkSimulator="*uid://1y2ey1e6qjwr"
 MultiplayerManager="*uid://wcko3qeo2b1l"
 SceneSwitcher="*uid://bljofxft7x6kd"
 GameState="*uid://l30fimoiryti"
+Noray="*uid://gu4bv4tgms3x"
+PacketHandshake="*uid://tt3j25a05n7c"
 
 [debug]
 
@@ -45,7 +47,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/netfox.extras/plugin.cfg", "res://addons/netfox.internals/plugin.cfg", "res://addons/netfox/plugin.cfg")
+enabled=PackedStringArray("res://addons/netfox.extras/plugin.cfg", "res://addons/netfox.internals/plugin.cfg", "res://addons/netfox.noray/plugin.cfg", "res://addons/netfox/plugin.cfg")
 
 [global_group]
 
